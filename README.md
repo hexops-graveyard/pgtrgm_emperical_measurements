@@ -552,3 +552,72 @@ Disk read/write:
 
 <img width="600" alt="image" src="https://user-images.githubusercontent.com/3173176/106710749-baa72680-65b3-11eb-8a01-1add9e49fc24.png">
 
+### Database startup time
+
+Clean startups are almost instantaneous, taking less than a second. 
+
+If the DB is not shut down correctly (i.e. previously terminated during startup), startup takes a fairly hefty 10m12s to complete before the DB will accept any connections, as it begins a recovery process (which I assume involves reading a substantial portion of the DB from disk):
+
+```
+PostgreSQL Database directory appears to contain a database; Skipping initialization
+
+2021-02-08 21:45:48.452 GMT [1] LOG:  starting PostgreSQL 13.1 on x86_64-pc-linux-musl, compiled by gcc (Alpine 9.3.0) 9.3.0, 64-bit
+2021-02-08 21:45:48.454 GMT [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2021-02-08 21:45:48.454 GMT [1] LOG:  listening on IPv6 address "::", port 5432
+2021-02-08 21:45:48.531 GMT [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2021-02-08 21:45:48.633 GMT [21] LOG:  database system was interrupted; last known up at 2021-02-03 06:16:10 GMT
+2021-02-08 21:47:51.157 GMT [27] FATAL:  the database system is starting up
+2021-02-08 21:47:56.383 GMT [33] FATAL:  the database system is starting up
+2021-02-08 21:48:13.198 GMT [39] FATAL:  the database system is starting up
+2021-02-08 21:48:43.088 GMT [45] FATAL:  the database system is starting up
+2021-02-08 21:52:43.672 GMT [51] FATAL:  the database system is starting up
+2021-02-08 21:53:32.048 GMT [58] FATAL:  the database system is starting up
+2021-02-08 21:54:07.696 GMT [64] FATAL:  the database system is starting up
+2021-02-08 21:55:36.446 GMT [21] LOG:  database system was not properly shut down; automatic recovery in progress
+2021-02-08 21:55:36.515 GMT [21] LOG:  redo starts at 2B/EE02EE8
+2021-02-08 21:55:36.518 GMT [21] LOG:  invalid record length at 2B/EE02FD0: wanted 24, got 0
+2021-02-08 21:55:36.518 GMT [21] LOG:  redo done at 2B/EE02F98
+2021-02-08 21:55:36.783 GMT [1] LOG:  database system is ready to accept connections
+```
+
+### Data size (total on disk)
+
+After indexing:
+
+```
+$ du -sh .postgres/
+ 73G	.postgres/
+```
+
+After `DROP INDEX files_contents_trgm_idx;`:
+
+```
+$ du -sh .postgres/
+ 54G	.postgres/
+```
+
+### Data size reported by Postgres
+
+After indexing:
+
+```
+postgres=# \d+
+                                  List of relations
+ Schema |     Name     |   Type   |  Owner   | Persistence |    Size    | Description 
+--------+--------------+----------+----------+-------------+------------+-------------
+ public | files        | table    | postgres | permanent   | 47 GB      | 
+ public | files_id_seq | sequence | postgres | permanent   | 8192 bytes | 
+(2 rows)
+```
+
+After `DROP INDEX files_contents_trgm_idx;`:
+
+```
+postgres=# \d+
+                                  List of relations
+ Schema |     Name     |   Type   |  Owner   | Persistence |    Size    | Description 
+--------+--------------+----------+----------+-------------+------------+-------------
+ public | files        | table    | postgres | permanent   | 47 GB      | 
+ public | files_id_seq | sequence | postgres | permanent   | 8192 bytes | 
+(2 rows)
+```
