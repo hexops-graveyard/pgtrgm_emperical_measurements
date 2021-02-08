@@ -1,0 +1,247 @@
+2021-02-01 00:25:03.625 GMT [33] STATEMENT:  CREATE INDEX IF NOT EXISTS files_contents_trgm_idx ON files USING GIN (contents gin_trgm_ops);
+2021-02-01 00:25:17.252 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:17.511 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:17.512 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:17.904 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:17.906 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:18.170 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:18.171 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:18.436 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:18.437 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:18.608 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:18.609 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:18.733 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:18.734 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:18.999 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:19.001 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:19.547 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:19.548 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:19.824 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:19.825 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:20.110 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:20.125 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:20.142 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:20.142 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:20.358 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:20.359 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:20.736 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:20.737 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:21.007 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:21.008 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:21.277 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:21.278 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:21.360 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:21.361 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:21.530 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:21.531 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:21.776 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:21.777 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:22.029 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:22.030 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:22.213 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:22.214 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:22.355 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:22.356 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:22.611 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:22.612 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:22.873 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:22.874 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:23.123 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:23.124 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:23.143 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:23.144 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:23.363 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:23.364 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:23.627 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:23.628 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:23.872 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:23.873 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:24.002 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:24.004 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:24.234 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:24.235 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:24.529 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:24.531 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:24.821 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:24.822 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:25.042 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:25.044 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:25.072 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:25.073 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:25.312 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:25.313 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:25.564 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:25.565 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:25.842 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:25.843 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:25.866 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:25.867 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:26.102 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:26.103 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:26.383 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:26.384 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:26.621 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:26.622 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:26.697 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:26.698 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:26.903 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:26.904 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:27.218 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:27.219 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:27.611 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:27.612 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:27.643 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:27.644 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:27.865 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:27.866 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:28.108 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:28.108 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:28.351 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:28.352 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:28.549 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:28.561 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:28.701 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:28.702 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:29.007 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:29.008 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:29.304 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:29.305 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:29.473 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:29.474 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:29.620 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:29.620 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:29.936 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:29.937 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:30.352 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:30.353 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:30.400 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:30.401 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:30.662 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:30.664 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:31.464 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:31.465 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:31.488 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:31.489 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:31.752 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:31.753 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:32.026 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:32.028 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:32.259 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:32.260 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:32.278 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:32.279 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:32.582 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:32.583 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:32.773 GMT [25] LOG:  using stale statistics instead of current ones because stats collector is not responding
+2021-02-01 00:25:32.780 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:32.781 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:32.814 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:32.815 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:32.915 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:32.916 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:33.207 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:33.219 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:33.475 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:33.476 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:33.720 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:33.721 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:33.748 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:33.748 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:33.998 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:33.999 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:34.251 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:34.252 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:34.508 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:34.509 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:34.844 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:34.845 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:35.262 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:35.263 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:35.528 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:35.530 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:35.826 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:35.827 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:35.963 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:35.964 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:36.197 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:36.199 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:36.469 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:36.470 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:36.728 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:36.729 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:36.828 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:36.829 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:36.975 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:36.976 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:37.252 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:37.253 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:37.624 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:37.625 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:37.816 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:37.817 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:37.881 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:37.882 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:38.166 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:38.167 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:38.684 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:38.685 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:39.303 GMT [33] WARNING:  could not truncate file "base/13442/5378565": No space left on device
+2021-02-01 00:25:39.309 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:39.311 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:39.312 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:39.312 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:39.313 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:39.481 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:39.482 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:40.934 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:40.936 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:42.352 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:42.353 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:43.420 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:43.421 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:44.473 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:44.473 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:45.238 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:45.239 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:46.095 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:46.096 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:46.828 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:46.829 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:48.040 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:48.041 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:49.164 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:49.165 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:49.711 GMT [1610] LOG:  using stale statistics instead of current ones because stats collector is not responding
+2021-02-01 00:25:49.728 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:49.729 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:49.731 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:49.732 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:49.733 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:52.781 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:52.782 GMT [26] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No space left on device
+2021-02-01 00:25:55.441 GMT [22] PANIC:  could not create file "pg_logical/replorigin_checkpoint.tmp": No space left on device
+2021-02-01 00:25:55.458 GMT [1] LOG:  checkpointer process (PID 22) was terminated by signal 6: Aborted
+2021-02-01 00:25:55.458 GMT [1] LOG:  terminating any other active server processes
+2021-02-01 00:25:55.460 GMT [25] WARNING:  terminating connection because of crash of another server process
+2021-02-01 00:25:55.460 GMT [25] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2021-02-01 00:25:55.460 GMT [25] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2021-02-01 00:25:55.460 GMT [33] WARNING:  terminating connection because of crash of another server process
+2021-02-01 00:25:55.460 GMT [33] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2021-02-01 00:25:55.460 GMT [33] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2021-02-01 00:25:55.484 GMT [26] LOG:  could not open temporary statistics file "pg_stat/global.tmp": No space left on device
+2021-02-01 00:25:58.115 GMT [1] LOG:  all server processes terminated; reinitializing
+2021-02-01 00:26:37.945 GMT [1611] LOG:  database system was interrupted; last known up at 2021-01-30 21:39:05 GMT
+2021-02-01 00:29:07.977 GMT [1] LOG:  received SIGHUP, reloading configuration files
+2021-02-01 00:29:08.101 GMT [1] LOG:  received SIGHUP, reloading configuration files
+2021-02-01 00:29:09.824 GMT [1611] LOG:  could not remove cache file "global/pg_internal.init": No space left on device
+2021-02-01 00:29:09.827 GMT [1611] LOG:  could not remove cache file "base/13442/pg_internal.init": No space left on device
+2021-02-01 00:29:09.836 GMT [1611] LOG:  database system was not properly shut down; automatic recovery in progress
+2021-02-01 00:29:09.883 GMT [1611] LOG:  redo starts at 19/82F04358
+2021-02-01 00:29:09.930 GMT [1611] WARNING:  could not remove file "base/13442/5378565": No space left on device
+2021-02-01 00:29:09.930 GMT [1611] CONTEXT:  WAL redo at 19/82F044A0 for Transaction/ABORT: 2021-02-01 00:25:38.066551+00; rels: base/13442/5378565
+2021-02-01 00:29:09.932 GMT [1611] LOG:  invalid record length at 19/82F04510: wanted 24, got 0
+2021-02-01 00:29:09.932 GMT [1611] LOG:  redo done at 19/82F044D8
+2021-02-01 00:29:10.060 GMT [1611] PANIC:  could not create file "pg_logical/replorigin_checkpoint.tmp": No space left on device
+2021-02-01 00:29:10.062 GMT [1] LOG:  startup process (PID 1611) was terminated by signal 6: Aborted
+2021-02-01 00:29:10.063 GMT [1] LOG:  aborting startup due to startup process failure
+2021-02-01 00:29:10.172 GMT [1] LOG:  database system is shut down
