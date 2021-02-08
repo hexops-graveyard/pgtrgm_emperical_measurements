@@ -1,5 +1,16 @@
 # Measuring the performance of pg_trgm
 
+This repository contains **extensive, verbose, detailed** information about the behavior of pg_trgm at large scales, particularly for regex search.
+
+Before viewing this repository, you will likely prefer to read these two blog posts:
+
+* ["Regex search over 10,000 GitHub repositories with Postgres"](https://devlog.hexops.com/2021/regex-search-over-10000-github-repositories-with-postgres)
+* ["Postgres Trigram search at scale"](https://devlog.hexops.com/2021/postgres-trigram-search-learnings)
+
+This repository shares howe we performed our empirical measurements, for reproducibility by others.
+
+## Overview
+
 - `cmd/githubscrape` contains a script that fetches the top 1,000 repositories for any language.
 - `top_repos/` contains URLs to the top 1,000 repositories for a given language. In total, 20,578 repositories.
 - `./clone_corpus.sh` clones all 20,578 repositories (concurrently.)
