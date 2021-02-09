@@ -5,7 +5,7 @@ This repository contains **extensive, verbose, detailed** information about the 
 Before viewing this repository, you will likely prefer to read these two blog posts:
 
 * ["Regex search over 10,000 GitHub repositories with Postgres"](https://devlog.hexops.com/2021/regex-search-over-10000-github-repositories-with-postgres)
-* ["Postgres Trigram search at scale"](https://devlog.hexops.com/2021/postgres-trigram-search-learnings)
+* ["Postgres Trigram search learnings"](https://devlog.hexops.com/2021/postgres-trigram-search-learnings)
 
 This repository shares howe we performed our empirical measurements, for reproducibility by others.
 
