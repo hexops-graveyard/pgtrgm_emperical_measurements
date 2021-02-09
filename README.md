@@ -2,12 +2,11 @@
 
 This repository contains **extensive, verbose, detailed** information about the behavior of pg_trgm at large scales, particularly for regex search.
 
-Before viewing this repository, you will likely prefer to read these two blog posts:
+Before viewing this repository, you will likely prefer to read the blog post format first:
 
-* ["Regex search over 10,000 GitHub repositories with Postgres"](https://devlog.hexops.com/2021/regex-search-over-10000-github-repositories-with-postgres)
-* ["Postgres Trigram search learnings"](https://devlog.hexops.com/2021/postgres-trigram-search-learnings)
+["Postgres regex search over 10,000 GitHub repositories"](https://devlog.hexops.com/2021/postgres-regex-search-over-10000-github-repositories)
 
-This repository shares howe we performed our empirical measurements, for reproducibility by others.
+This repository shares how we performed our empirical measurements, for reproducibility by others.
 
 ## Overview
 
