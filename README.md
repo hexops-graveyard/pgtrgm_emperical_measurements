@@ -11,9 +11,17 @@ This repository shares howe we performed our empirical measurements, for reprodu
 
 ## Overview
 
-- `cmd/githubscrape` contains a script that fetches the top 1,000 repositories for any language.
+- `cmd/corpusindex` small Go program which bulk inserts the corpus into Postgres
+- `cmd/githubscrape` small Go program that fetches the top 1,000 repositories for any language.
+- `cmd/visualize-docker-json-stats` cleans up `docker_stats_logs/` output for visualization using [the jp tool](https://github.com/sgreben/jp).
+- `docker_logs/` logs from the Docker container during execution.
+- `docker_stats_logs/` logs from `docker stats` during indexing/querying the corpus, showing CPU/memory usage over time.
 - `top_repos/` contains URLs to the top 1,000 repositories for a given language. In total, 20,578 repositories.
-- `./clone_corpus.sh` clones all 20,578 repositories (concurrently.)
+- `clone-corpus.sh` clones all 20,578 repositories (concurrently.)
+- `extract-base-postgres-config.sh` extracts the base Postgres config from the Docker image.
+- `index-corpus.sh` used to invoke the `corpusindex` tool for every repository, once cloned.
+- `query-corpus.sh` runs detailed search queries over the corpus
+- `run-postgres.sh` runs the Postgres server Docker image.
 
 ## Cloning the corpus
 
@@ -167,6 +175,24 @@ See `docker_stats_logs/configuration-failure-1.log` for a JSON log stream of con
 
 There is evidence that indexing with that configuration -- for whatever reason -- for the vast majority of indexing time uses just 1-2 CPU cores, and peak ~11 GiB of memory according to `docker stats`.
 
+Memory usage in MiB as reported by `docker stats` over time rendered via:
+
+```
+cat ./docker_stats_logs/configuration-failure-1.log | go run ./cmd/visualize-docker-json-stats/main.go --trim-end=32000 | jq | jp -y '..MemUsageMiB'
+```
+
+<img width="981" alt="image" src="https://user-images.githubusercontent.com/3173176/107313722-56bbac80-6a50-11eb-94c7-8e13ea095053.png">
+
+CPU usage percentage (150% indicates "one and a half CPU cores") as reported by `docker stats` over time rendered via:
+
+```
+cat ./docker_stats_logs/configuration-failure-1.log | go run ./cmd/visualize-docker-json-stats/main.go --trim-end=32000 | jq | jp -y '..CPUPerc'
+```
+
+<img width="982" alt="image" src="https://user-images.githubusercontent.com/3173176/107313915-cc277d00-6a50-11eb-9282-62159a127966.png">
+
+Less reliable charts from a Mac app (seems to have periodic data loss issues):
+
 Memory usage (purple == compressed, red==active, blue==wired):
 
 <img width="354" alt="image" src="https://user-images.githubusercontent.com/3173176/106368429-9a067480-6306-11eb-82f6-769733a425ee.png">
@@ -229,7 +255,25 @@ See `docker_stats_logs/configuration-failure-2.log` for a full JSON stream of `d
 
 See `logs/configuration-failure-2.log` for the Postgres logs during this attempt.
 
-Of particular note is that, again, almost 100% of the time was spent with a single CPU core maxed out and the vast majority of the CPU in `Idle` state (red):
+Of particular note is that, again, almost 100% of the time was spent with a single CPU core maxed out and the vast majority of the CPU in `Idle` state (red).
+
+Memory usage in MiB as reported by `docker stats` over time rendered via:
+
+```
+cat ./docker_stats_logs/configuration-failure-2.log | go run ./cmd/visualize-docker-json-stats/main.go | jq | jp -y '..MemUsageMiB'
+```
+
+<img width="980" alt="image" src="https://user-images.githubusercontent.com/3173176/107314104-350ef500-6a51-11eb-909f-2f1b524d29b2.png">
+
+CPU usage percentage (150% indicates "one and a half CPU cores") as reported by `docker stats` over time rendered via:
+
+```
+cat ./docker_stats_logs/configuration-failure-2.log | go run ./cmd/visualize-docker-json-stats/main.go | jq | jp -y '..CPUPerc'
+```
+
+<img width="980" alt="image" src="https://user-images.githubusercontent.com/3173176/107314168-507a0000-6a51-11eb-8a18-ec18752f7f16.png">
+
+Less reliable charts from a Mac app (seems to have periodic data loss issues):
 
 <img width="597" alt="image" src="https://user-images.githubusercontent.com/3173176/106505762-fba11d00-6485-11eb-8c58-5954b1dfeb3a.png">
 
@@ -308,6 +352,25 @@ Total Postgres data size afterwards (again, less than 82 GiB due to compression)
 $ du -sh .postgres/
  73G	.postgres/
 ```
+
+Memory usage in MiB as reported by `docker stats` over time rendered via:
+
+```
+cat ./docker_stats_logs/configuration-3.log | go run ./cmd/visualize-docker-json-stats/main.go --trim-end=0 | jq | jp -y '..MemUsageMiB'
+```
+
+<img width="980" alt="image" src="https://user-images.githubusercontent.com/3173176/107315387-ce3f0b00-6a53-11eb-886c-410f000f73bd.png">
+
+CPU usage percentage (150% indicates "one and a half CPU cores") as reported by `docker stats` over time rendered via:
+
+```
+cat ./docker_stats_logs/configuration-3.log | go run ./cmd/visualize-docker-json-stats/main.go --trim-end=0 | jq | jp -y '..CPUPerc'
+```
+
+<img width="980" alt="image" src="https://user-images.githubusercontent.com/3173176/107315239-8324f800-6a53-11eb-9a5b-fcc61d1a7b59.png">
+
+
+(We did not take measurements through the Mac app for indexing this time.)
 
 ## Query performance
 
