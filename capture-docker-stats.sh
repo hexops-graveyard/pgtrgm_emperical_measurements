@@ -1,0 +1,1 @@
+watch -n 1 "(date '+TIME:%H:%M:%S'; docker stats --no-stream --format '{{json .}}') | tee $OUT"

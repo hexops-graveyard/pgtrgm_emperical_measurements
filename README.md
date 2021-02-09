@@ -16,6 +16,7 @@ This repository shares how we performed our empirical measurements, for reproduc
 - `docker_logs/` logs from the Docker container during execution.
 - `docker_stats_logs/` logs from `docker stats` during indexing/querying the corpus, showing CPU/memory usage over time.
 - `top_repos/` contains URLs to the top 1,000 repositories for a given language. In total, 20,578 repositories.
+- `capture-docker-stats.sh` captures `docker stats` output every 1s with timing info.
 - `clone-corpus.sh` clones all 20,578 repositories (concurrently.)
 - `extract-base-postgres-config.sh` extracts the base Postgres config from the Docker image.
 - `index-corpus.sh` used to invoke the `corpusindex` tool for every repository, once cloned.
