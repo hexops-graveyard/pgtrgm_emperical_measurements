@@ -16,11 +16,12 @@ This repository shares how we performed our empirical measurements, for reproduc
 - `docker_logs/` logs from the Docker container during execution.
 - `docker_stats_logs/` logs from `docker stats` during indexing/querying the corpus, showing CPU/memory usage over time.
 - `top_repos/` contains URLs to the top 1,000 repositories for a given language. In total, 20,578 repositories.
+- `query_logs/` the Postgres SQL queries we ultimately ran.
 - `capture-docker-stats.sh` captures `docker stats` output every 1s with timing info.
 - `clone-corpus.sh` clones all 20,578 repositories (concurrently.)
 - `extract-base-postgres-config.sh` extracts the base Postgres config from the Docker image.
 - `index-corpus.sh` used to invoke the `corpusindex` tool for every repository, once cloned.
-- `query-corpus.sh` runs detailed search queries over the corpus
+- `query-corpus.sh` runs detailed search queries over the corpus (invokes the other `query-corpus*` scripts.)
 - `run-postgres.sh` runs the Postgres server Docker image.
 
 ## Cloning the corpus
@@ -374,257 +375,53 @@ cat ./docker_stats_logs/configuration-3.log | go run ./cmd/visualize-docker-json
 
 ## Query performance
 
-SQL:
+Restart Postgres first, such that its memory caches are emptied.
 
-```
-select id from files where contents ~ $1 LIMIT $2;
-```
+Once it starts, capture docker stats:
 
-10:31pm: start executing queries
-
-We start with a small LIMIT of `10`:
-
-| Query | Limit | Results | Time |
-|-------|-------|---------|------|
-| `error` | 10 | 10 | 15ms |
-| `error` | 10 | 10 | 7ms |
-| `error` | 10 | 10 | 6ms |
-| `error` | 10 | 10 | 9ms |
-| `error` | 10 | 10 | 8ms |
-| `fmt.Error` | 10 | 10 | 3000ms |
-| `fmt.Error` | 10 | 10 | 756ms |
-| `fmt.Error` | 10 | 10 | 763ms |
-| `fmt.Error` | 10 | 10 | 747ms |
-| `error` | 10 | 10 | 8ms |
-| `fmt.Errorf` | 10 | 10 | 488ms |
-| `fmt.Errorf` | 10 | 10 | 414ms |
-| `fmt.Errorf` | 10 | 10 | 413ms |
-| `fmt.Println` | 10 | 10 | 216ms |
-| `fmt.Println` | 10 | 10 | 268ms |
-| `fmt.Println` | 10 | 10 | 287ms |
-
-We raise the limit to 1,000:
-
-| Query | Limit | Results | Time |
-|-------|-------|---------|------|
-| `fmt.Println` | 1000 | 1000 | 1816ms |
-| `fmt.Println` | 1000 | 1000 | 477ms |
-| `fmt.Println` | 1000 | 1000 | 471ms |
-| `error` | 1000 | 1000 | 1931ms |
-| `error` | 1000 | 1000 | 2493ms |
-| `error` | 1000 | 1000 | 800ms |
-| `error` | 1000 | 1000 | 2328ms |
-| `var` | 1000 | 1000 | 1330ms |
-| `var` | 1000 | 1000 | 1072ms |
-| `fmt.Error` | 1000 | 1000 | 1233ms |
-| `fmt.Error` | 1000 | 1000 | 1100ms |
-
-We drop the limit entirely:
-
-```
-postgres=# select count(id) from (select id from files where contents ~ 'fmt.Error') as e;
- count  
---------
- 127900
-(1 row)
-
-Time: 693035.477 ms (11:33.035)
+```sh
+OUT=docker_stats_logs/query-run-n.log ./capture-docker-stats.sh
 ```
 
-(10:52pm)
+Set a query timeoout of 5 minutes on the database:
 
-```
-postgres=# select count(id) from (select id from files where contents ~ '^.*fmt\.Error.*&') as e;
-^CCancel request sent
-ERROR:  canceling statement due to user request
-Time: 1534.340 ms (00:01.534)
-postgres=# select count(id) from (select id from files where contents ~ '^.*fmt\.Error.*$') as e;
- count  
---------
- 127897
-(1 row)
-
-Time: 531329.544 ms (08:51.330)
+```sql
+ALTER DATABASE postgres SET statement_timeout = '300s';
 ```
 
-11:03pm
+Then begin querying the corpus:
 
-And we add back a LIMIT:
-
-```
-postgres=# select count(id) from (select id from files where contents ~ 'bytes.Buffer' LIMIT 10) as e;
- count 
--------
-    10
-(1 row)
-
-Time: 9478.462 ms (00:09.478)
+```sh
+./query-corpus.sh
 ```
 
-```
-postgres=# select count(id) from (select id from files where contents ~ 'bytes.Buffer' LIMIT 10) as e;
- count 
--------
-    10
-(1 row)
+## Query performance
 
-Time: 2499.148 ms (00:02.499)
-```
-
-### Investigating causes of slowness
-
-We can see clearly that bitmap heap scans take the most time, even on smaller queries for relatively rare trigrams:
+We started queries at 12:42PM MST using:
 
 ```
-postgres=# EXPLAIN ANALYZE select count(id) from (select id from files where contents ~ 'bytes.Buffer' LIMIT 10) as e;
-                                                                       QUERY PLAN                                                                       
---------------------------------------------------------------------------------------------------------------------------------------------------------
- Aggregate  (cost=73.66..73.67 rows=1 width=8) (actual time=2349.134..2349.183 rows=1 loops=1)
-   ->  Limit  (cost=62.44..73.54 rows=10 width=8) (actual time=2050.648..2349.111 rows=10 loops=1)
-         ->  Bitmap Heap Scan on files  (cost=62.44..1127.40 rows=960 width=8) (actual time=2050.637..2348.991 rows=10 loops=1)
-               Recheck Cond: (contents ~ 'bytes.Buffer'::text)
-               Rows Removed by Index Recheck: 2263
-               Heap Blocks: exact=1068
-               ->  Bitmap Index Scan on files_contents_trgm_idx  (cost=0.00..62.20 rows=960 width=0) (actual time=269.440..269.444 rows=240080 loops=1)
-                     Index Cond: (contents ~ 'bytes.Buffer'::text)
- Planning Time: 7.834 ms
- Execution Time: 2352.454 ms
-(10 rows)
-
-Time: 2360.962 ms (00:02.361)
+./query-corpus.sh &> query_logs/query-run-1.log
 ```
 
-Raising `work_mem` from `16MB` to `8GB` does not appear to help with this type of query, the first query after postgres starts is incredibly slow:
+- Find the exact SQL queries we ran in `query_logs/query-run-1.log`.
+- Find the `docker stats` measured during query execution in `docker_stats_logs/query-run-1.log`.
 
-```
-postgres=# EXPLAIN ANALYZE select count(id) from (select id from files where contents ~ 'bytes.Buffer' LIMIT 10) as e;
-                                                                        QUERY PLAN                                                                        
-----------------------------------------------------------------------------------------------------------------------------------------------------------
- Aggregate  (cost=73.66..73.67 rows=1 width=8) (actual time=40055.427..40055.493 rows=1 loops=1)
-   ->  Limit  (cost=62.44..73.54 rows=10 width=8) (actual time=39239.585..40054.848 rows=10 loops=1)
-         ->  Bitmap Heap Scan on files  (cost=62.44..1127.40 rows=960 width=8) (actual time=39239.575..40054.691 rows=10 loops=1)
-               Recheck Cond: (contents ~ 'bytes.Buffer'::text)
-               Rows Removed by Index Recheck: 2263
-               Heap Blocks: exact=1068
-               ->  Bitmap Index Scan on files_contents_trgm_idx  (cost=0.00..62.20 rows=960 width=0) (actual time=1808.915..1808.931 rows=240080 loops=1)
-                     Index Cond: (contents ~ 'bytes.Buffer'::text)
- Planning Time: 43163.457 ms
- Execution Time: 40076.800 ms
-(10 rows)
+CPU usage (150% == one and a half cores) during query execution as visualized by:
+
+```sh
+cat ./docker_stats_logs/query-run-1.log | go run ./cmd/visualize-docker-json-stats/main.go --trim-end=9000 | jq | jp -y '..CPUPerc'
 ```
 
-Subsequent attempts are still ~2.4s:
+<img width="1001" alt="image" src="https://user-images.githubusercontent.com/3173176/107459155-c85c2f00-6b12-11eb-9b2a-27e0f1424ed6.png">
 
-```
-postgres=# EXPLAIN ANALYZE select count(id) from (select id from files where contents ~ 'bytes.Buffer' LIMIT 10) as e;
-                                                                       QUERY PLAN                                                                       
---------------------------------------------------------------------------------------------------------------------------------------------------------
- Aggregate  (cost=73.66..73.67 rows=1 width=8) (actual time=2440.732..2440.783 rows=1 loops=1)
-   ->  Limit  (cost=62.44..73.54 rows=10 width=8) (actual time=2157.211..2440.690 rows=10 loops=1)
-         ->  Bitmap Heap Scan on files  (cost=62.44..1127.40 rows=960 width=8) (actual time=2157.177..2440.528 rows=10 loops=1)
-               Recheck Cond: (contents ~ 'bytes.Buffer'::text)
-               Rows Removed by Index Recheck: 2263
-               Heap Blocks: exact=1068
-               ->  Bitmap Index Scan on files_contents_trgm_idx  (cost=0.00..62.20 rows=960 width=0) (actual time=289.955..289.959 rows=240080 loops=1)
-                     Index Cond: (contents ~ 'bytes.Buffer'::text)
- Planning Time: 5.030 ms
- Execution Time: 2443.597 ms
-(10 rows)
+Memory usage in MiB during query execution as visualized by:
+
+```sh
+cat ./docker_stats_logs/query-run-1.log | go run ./cmd/visualize-docker-json-stats/main.go --trim-end=9000 | jq | jp -y '..MemUsageMiB'
 ```
 
-It is also worth noting that some queries can devolve into full index rechecks, if they match many documents (the `\b` here makes us recheck 235,891 documents):
+<img width="996" alt="image" src="https://user-images.githubusercontent.com/3173176/107459238-fa6d9100-6b12-11eb-8692-4a68e421b2a6.png">
 
-```
-postgres=# EXPLAIN ANALYZE select count(id) from (select id from files where contents ~ '\bbytes.Buffer\b' LIMIT 10) as e;
-                                                                        QUERY PLAN                                                                        
-----------------------------------------------------------------------------------------------------------------------------------------------------------
- Aggregate  (cost=90.16..90.17 rows=1 width=8) (actual time=1044322.378..1044322.434 rows=1 loops=1)
-   ->  Limit  (cost=78.94..90.04 rows=10 width=8) (actual time=1044320.897..1044320.924 rows=0 loops=1)
-         ->  Bitmap Heap Scan on files  (cost=78.94..1143.90 rows=960 width=8) (actual time=1044320.359..1044320.378 rows=0 loops=1)
-               Recheck Cond: (contents ~ '\bbytes.Buffer\b'::text)
-               Rows Removed by Index Recheck: 235891
-               Heap Blocks: exact=121443
-               ->  Bitmap Index Scan on files_contents_trgm_idx  (cost=0.00..78.70 rows=960 width=0) (actual time=1010.510..1010.521 rows=235891 loops=1)
-                     Index Cond: (contents ~ '\bbytes.Buffer\b'::text)
- Planning Time: 5.431 ms
- Execution Time: 1044726.375 ms
-(10 rows)
-```
-
-This can also occur sometimes in non-intuitive fashions, for example a query that matches no results can be quite slow if it matches a number of common trigrams across the documents:
-
-```
-postgres=# EXPLAIN ANALYZE select count(id) from (select id from files where contents ~ 'asodijowijaoiwjdaoiwjdowaijdwoaidjwaoidjwa' LIMIT 10) as e;
-                                                                      QUERY PLAN                                                                       
--------------------------------------------------------------------------------------------------------------------------------------------------------
- Aggregate  (cost=144.06..144.07 rows=1 width=8) (actual time=62122.593..62122.624 rows=1 loops=1)
-   ->  Limit  (cost=132.84..143.94 rows=10 width=8) (actual time=62122.570..62122.589 rows=0 loops=1)
-         ->  Bitmap Heap Scan on files  (cost=132.84..1197.80 rows=960 width=8) (actual time=62122.538..62122.550 rows=0 loops=1)
-               Recheck Cond: (contents ~ 'asodijowijaoiwjdaoiwjdowaijdwoaidjwaoidjwa'::text)
-               Rows Removed by Index Recheck: 2468
-               Heap Blocks: exact=1968
-               ->  Bitmap Index Scan on files_contents_trgm_idx  (cost=0.00..132.60 rows=960 width=0) (actual time=910.442..910.446 rows=2468 loops=1)
-                     Index Cond: (contents ~ 'asodijowijaoiwjdaoiwjdowaijdwoaidjwaoidjwa'::text)
- Planning Time: 8.868 ms
- Execution Time: 62123.915 ms
-(10 rows)
-
-postgres=# EXPLAIN ANALYZE select count(id) from (select id from files where contents ~ 'asodijowijaoiwjdaoiwjdowaijdwoaidjwaoidjwa' LIMIT 10) as e;
-                                                                      QUERY PLAN                                                                       
--------------------------------------------------------------------------------------------------------------------------------------------------------
- Aggregate  (cost=144.06..144.07 rows=1 width=8) (actual time=14894.472..14894.503 rows=1 loops=1)
-   ->  Limit  (cost=132.84..143.94 rows=10 width=8) (actual time=14894.460..14894.479 rows=0 loops=1)
-         ->  Bitmap Heap Scan on files  (cost=132.84..1197.80 rows=960 width=8) (actual time=14894.439..14894.451 rows=0 loops=1)
-               Recheck Cond: (contents ~ 'asodijowijaoiwjdaoiwjdowaijdwoaidjwaoidjwa'::text)
-               Rows Removed by Index Recheck: 2468
-               Heap Blocks: exact=1968
-               ->  Bitmap Index Scan on files_contents_trgm_idx  (cost=0.00..132.60 rows=960 width=0) (actual time=118.807..118.811 rows=2468 loops=1)
-                     Index Cond: (contents ~ 'asodijowijaoiwjdaoiwjdowaijdwoaidjwaoidjwa'::text)
- Planning Time: 18.044 ms
- Execution Time: 14897.061 ms
-(10 rows)
-```
-
-It can be quite difficult to even craft queries that do not require rechecks:
-
-```
-postgres=# EXPLAIN ANALYZE select count(id) from (select id from files where contents ~ 'a1%e\$1j\.k9e&k\^k1g3g4g5g6h6j23kj1' LIMIT 10) as e;
-                                                                     QUERY PLAN                                                                     
-----------------------------------------------------------------------------------------------------------------------------------------------------
- Aggregate  (cost=144.06..144.07 rows=1 width=8) (actual time=1874.255..1874.287 rows=1 loops=1)
-   ->  Limit  (cost=132.84..143.94 rows=10 width=8) (actual time=1874.240..1874.260 rows=0 loops=1)
-         ->  Bitmap Heap Scan on files  (cost=132.84..1197.80 rows=960 width=8) (actual time=1874.229..1874.242 rows=0 loops=1)
-               Recheck Cond: (contents ~ 'a1%e\$1j\.k9e&k\^k1g3g4g5g6h6j23kj1'::text)
-               Rows Removed by Index Recheck: 367
-               Heap Blocks: exact=287
-               ->  Bitmap Index Scan on files_contents_trgm_idx  (cost=0.00..132.60 rows=960 width=0) (actual time=14.385..14.389 rows=367 loops=1)
-                     Index Cond: (contents ~ 'a1%e\$1j\.k9e&k\^k1g3g4g5g6h6j23kj1'::text)
- Planning Time: 6.285 ms
- Execution Time: 1874.698 ms
-(10 rows)
-```
-
-### Resource utilization during queries
-
-CPU usage:
-
-<img width="599" alt="image" src="https://user-images.githubusercontent.com/3173176/106710640-7f0c5c80-65b3-11eb-962a-1f220727b57d.png">
-
-Memory pressure:
-
-<img width="598" alt="image" src="https://user-images.githubusercontent.com/3173176/106710661-8c294b80-65b3-11eb-8b2f-c453d9d78380.png">
-
-Memory usage:
-
-<img width="602" alt="image" src="https://user-images.githubusercontent.com/3173176/106710685-99463a80-65b3-11eb-89aa-42d1ce7698bd.png">
-
-Memory swap:
-
-<img width="600" alt="image" src="https://user-images.githubusercontent.com/3173176/106710715-ab27dd80-65b3-11eb-989e-a60ec9211b1c.png">
-
-Disk read/write:
-
-<img width="600" alt="image" src="https://user-images.githubusercontent.com/3173176/106710749-baa72680-65b3-11eb-8a01-1add9e49fc24.png">
 
 ### Database startup time
 
