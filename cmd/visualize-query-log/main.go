@@ -21,6 +21,7 @@ type result struct {
 	PlanningTimeMs  float64
 	ExecutionTimeMs float64
 	Limit           float64
+	IndexRechecks   float64
 	Query           string
 	Rows            float64
 }
@@ -60,6 +61,11 @@ func main() {
 		case strings.HasPrefix(line, "limit ") || strings.HasPrefix(line, "unlimited"):
 			current.Query = strings.Split(line, ": '")[1]
 			current.Query = current.Query[:len(current.Query)-1]
+		case strings.Contains(line, "Rows Removed by Index Recheck: "):
+			s := strings.TrimSpace(line)
+			s = strings.TrimPrefix(s, "Rows Removed by Index Recheck: ")
+			s = strings.TrimSuffix(s, "\r")
+			current.IndexRechecks, _ = strconv.ParseFloat(s, 64)
 		case strings.Contains(line, "Planning Time"):
 			s := strings.Split(line, ":")[1]
 			s = strings.TrimPrefix(s, " ")

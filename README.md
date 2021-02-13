@@ -583,7 +583,7 @@ $ cat ./query_logs/query-run-2.log ./query_logs/query-run-3.log | go run ./cmd/v
 
 (But we should include the last single query which bricked our MacOS installation mentioned previously..)
 
-#### 
+#### CPU/memory usage
 
 CPU usage (150% == one and a half cores) during query execution as visualized by:
 
@@ -602,6 +602,35 @@ cat ./docker_stats_logs/query-run-2.log ./docker_stats_logs/query-run-3.log | go
 <img width="1251" alt="image" src="https://user-images.githubusercontent.com/3173176/107847596-30787280-6daa-11eb-979c-b77c3711b948.png">
 
 The large spike towards the end is a result of beginning to execute `query-corpus-unlimited.sh` queries - i.e. ones without any `LIMIT`.
+
+#### Other measurements
+
+We can determine how many queries executed in under a time bucket using e.g.:
+
+```
+$ cat ./query_logs/query-run-2.log ./query_logs/query-run-3.log | go run ./cmd/visualize-query-log/main.go | jq '.[] | select (.ExecutionTimeMs < 25000)' | jq -c -s '.[]' | wc -l
+```
+
+Or this to get a scatter plot showing planning time for the query (X axis) vs. execution time for the query (Y axis):
+
+```
+cat ./query_logs/query-run-2.log ./query_logs/query-run-3.log | go run ./cmd/visualize-query-log/main.go | jq '.[]' | jq -s | jp -x '..PlanningTimeMs' -y '..ExecutionTimeMs' -type scatter -canvas quarter
+```
+
+Or this to do the same, but only include queries that executed in under 5s:
+
+```
+cat ./query_logs/query-run-2.log ./query_logs/query-run-3.log | go run ./cmd/visualize-query-log/main.go | jq '.[] | select(.ExecutionTimeMs < 5000)' | jq -s | jp -x '..PlanningTimeMs' -y '..ExecutionTimeMs' -type scatter -canvas quarter
+```
+
+We can also plot execution time (Y axis) vs. # of index rechecks (X axis):
+
+```
+cat ./query_logs/query-run-2.log ./query_logs/query-run-3.log | go run ./cmd/visualize-query-log/main.go | jq '.[]' | jq -s | jp -x '..IndexRechecks' -y '..ExecutionTimeMs' -type scatter -canvas quarter
+```
+
+<img width="1036" alt="image" src="https://user-images.githubusercontent.com/3173176/107849660-fc0cb280-6db9-11eb-9c10-cb7e74366ab7.png">
+
 
 ### Database startup time
 
