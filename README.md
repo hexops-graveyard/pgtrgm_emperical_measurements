@@ -423,6 +423,186 @@ cat ./docker_stats_logs/query-run-1.log | go run ./cmd/visualize-docker-json-sta
 <img width="996" alt="image" src="https://user-images.githubusercontent.com/3173176/107459238-fa6d9100-6b12-11eb-8692-4a68e421b2a6.png">
 
 
+We can see there were 1458 queries total with:
+
+```sh
+$ cat ./query_logs/query-run-1.log | go run ./cmd/visualize-query-log/main.go | jq '.[]' | jq -c -s '.[]' | wc -l
+    1458
+```
+
+And of those, we can see that 20 timed out:
+
+```sh
+$ cat ./query_logs/query-run-1.log | go run ./cmd/visualize-query-log/main.go | jq '.[] | select (.Timeout == true)' | jq -c -s '.[]' | wc -l
+      20
+```
+
+We can also visualize that 1405 (96.4%) queries completed in under 1300ms (Y axis), but are generally planned to execute in under 47ms (X axis):
+
+```sh
+cat ./query_logs/query-run-1.log | go run ./cmd/visualize-query-log/main.go | jq '.[] | select(.ExecutionTimeMs < 1300) | select(.PlanningTimeMs < 50)' | jq -c -s '.[]' | wc -l
+```
+
+```sh
+cat ./query_logs/query-run-1.log | go run ./cmd/visualize-query-log/main.go | jq '.[] | select(.ExecutionTimeMs < 1300) | select(.PlanningTimeMs < 50)' | jq -s | jp -x '..PlanningTimeMs' -y '..ExecutionTimeMs' -type scatter -canvas quarter
+```
+
+<img width="980" alt="image" src="https://user-images.githubusercontent.com/3173176/107490175-c0b67d80-6b46-11eb-9124-24910290ecc6.png">
+
+
+However, there are outliers which were planned for execution in under 100ms (X axis) and actually had execution between 1.3s to ~150s (Y axis):
+
+```sh
+cat ./query_logs/query-run-1.log | go run ./cmd/visualize-query-log/main.go | jq '.[] | select(.ExecutionTimeMs > 1300) | select(.PlanningTimeMs < 100)' | jq -s | jp -x '..PlanningTimeMs' -y '..ExecutionTimeMs' -type scatter -canvas quarter
+```
+
+<img width="981" alt="image" src="https://user-images.githubusercontent.com/3173176/107491036-e1330780-6b47-11eb-845b-0dafaa1cff44.png">
+
+We can see the above accounted for 29 queries via:
+
+```
+cat ./query_logs/query-run-1.log | go run ./cmd/visualize-query-log/main.go | jq '.[] | select(.ExecutionTimeMs > 1300) | select(.PlanningTimeMs < 100)' | jq -c -s '.[]' | wc -l
+```
+
+We can also see how many of which types of queries we ran, e.g. via:
+
+```
+$ cat ./query_logs/query-run-1.log | go run ./cmd/visualize-query-log/main.go | jq -c '.[] | {Timeout: .Timeout, Limit: .Limit, Results: .Rows, Query: .Query}' | sort | uniq -c
+ 100 {"Timeout":false,"Limit":10,"Results":10,"Query":"123456789"}
+   2 {"Timeout":false,"Limit":10,"Results":10,"Query":"ac8ac5d63b66b83b90ce41a2d4061635"}
+   4 {"Timeout":false,"Limit":10,"Results":10,"Query":"bytes.Buffer"}
+   2 {"Timeout":false,"Limit":10,"Results":10,"Query":"d97f1d3ff91543[e-f]49.8b07517548877"}
+ 100 {"Timeout":false,"Limit":10,"Results":10,"Query":"fmt\\.Error"}
+ 100 {"Timeout":false,"Limit":10,"Results":10,"Query":"fmt\\.Print.*"}
+ 100 {"Timeout":false,"Limit":10,"Results":10,"Query":"fmt\\.Println"}
+ 200 {"Timeout":false,"Limit":10,"Results":7,"Query":"error"}
+ 100 {"Timeout":false,"Limit":10,"Results":7,"Query":"var"}
+ 100 {"Timeout":false,"Limit":100,"Results":10,"Query":"123456789"}
+   2 {"Timeout":false,"Limit":100,"Results":10,"Query":"ac8ac5d63b66b83b90ce41a2d4061635"}
+   4 {"Timeout":false,"Limit":100,"Results":10,"Query":"bytes.Buffer"}
+   2 {"Timeout":false,"Limit":100,"Results":10,"Query":"d97f1d3ff91543[e-f]49.8b07517548877"}
+ 100 {"Timeout":false,"Limit":100,"Results":10,"Query":"fmt\\.Error"}
+ 100 {"Timeout":false,"Limit":100,"Results":10,"Query":"fmt\\.Print.*"}
+ 100 {"Timeout":false,"Limit":100,"Results":10,"Query":"fmt\\.Println"}
+ 200 {"Timeout":false,"Limit":100,"Results":7,"Query":"error"}
+ 100 {"Timeout":false,"Limit":100,"Results":7,"Query":"var"}
+   2 {"Timeout":false,"Limit":1000,"Results":10,"Query":"123456789"}
+   2 {"Timeout":false,"Limit":1000,"Results":10,"Query":"ac8ac5d63b66b83b90ce41a2d4061635"}
+   4 {"Timeout":false,"Limit":1000,"Results":10,"Query":"bytes.Buffer"}
+   2 {"Timeout":false,"Limit":1000,"Results":10,"Query":"d97f1d3ff91543[e-f]49.8b07517548877"}
+   2 {"Timeout":false,"Limit":1000,"Results":10,"Query":"fmt\\.Error"}
+   2 {"Timeout":false,"Limit":1000,"Results":10,"Query":"fmt\\.Print.*"}
+   2 {"Timeout":false,"Limit":1000,"Results":10,"Query":"fmt\\.Println"}
+   4 {"Timeout":false,"Limit":1000,"Results":7,"Query":"error"}
+   2 {"Timeout":false,"Limit":1000,"Results":7,"Query":"var"}
+   4 {"Timeout":true,"Limit":-1,"Results":10,"Query":"error"}
+   2 {"Timeout":true,"Limit":-1,"Results":10,"Query":"fmt\\.Error"}
+   1 {"Timeout":true,"Limit":-1,"Results":10,"Query":"fmt\\.Println"}
+   2 {"Timeout":true,"Limit":-1,"Results":9,"Query":"123456789"}
+   2 {"Timeout":true,"Limit":-1,"Results":9,"Query":"ac8ac5d63b66b83b90ce41a2d4061635"}
+   2 {"Timeout":true,"Limit":-1,"Results":9,"Query":"bytes.Buffer"}
+   2 {"Timeout":true,"Limit":-1,"Results":9,"Query":"d97f1d3ff91543[e-f]49.8b07517548877"}
+   2 {"Timeout":true,"Limit":-1,"Results":9,"Query":"fmt\\.Print.*"}
+   1 {"Timeout":true,"Limit":-1,"Results":9,"Query":"fmt\\.Println"}
+   2 {"Timeout":true,"Limit":-1,"Results":9,"Query":"var"}
+```
+
+### Query execution #2
+
+We rerun with much higher number of queries executed, and with timeout raised to 1h:
+
+```sql
+ALTER DATABASE postgres SET statement_timeout = '3600s';
+```
+
+We start at 3:06AM MST , and execution ran until 7:21PM MST the next day. At this point, `query-corpus-unlimited.sh` was configured to execute each query 100 times. Due to how slow these queries were, we estimated it would take ~11 days to complete and halted testing to reduce the number of queries to just 2 executions per query. These runs are recorded in `query_logs/query-run-[2-3].log` and `docker_stats_logs/query-run-[2-3].log` respectively.
+
+The third attempt executed only partially, in specific it executed until the queries for unlimited/unbounded `var`:
+
+```
+EXPLAIN ANALYZE select count(id) from (select id from files where contents ~ 'var') as e;
+```
+
+Once the first unbounded `var` query described above tried to run, we found the machine appeared to be off unexpectedly. MacOS ran out of resources (likely CPU, but possibly memory - and definitely not disk space) causing MacOS's kernel watchdog extension to panic ultimately bricking the entire MacOS installation requiring us to reinstall it: https://twitter.com/slimsag/status/1360513988514091010
+
+### Query execution #2 & 3 performance
+
+#### What queries were ran?
+
+Total number of queries ran:
+
+```
+$ cat ./query_logs/query-run-2.log ./query_logs/query-run-3.log | go run ./cmd/visualize-query-log/main.go | jq -c '.[] | {Timeout: .Timeout, Limit: .Limit, Results: .Rows, Query: .Query}' | wc -l
+   19936
+```
+
+Exact numbers of each query type ran:
+
+```
+$ cat ./query_logs/query-run-2.log ./query_logs/query-run-3.log | go run ./cmd/visualize-query-log/main.go | jq -c '.[] | {Timeout: .Timeout, Limit: .Limit, Results: .Rows, Query: .Query}' | sort | uniq -c | sort
+   2 {"Timeout":false,"Limit":-1,"Results":9,"Query":"fmt\\.Error"}
+   2 {"Timeout":false,"Limit":-1,"Results":9,"Query":"fmt\\.Print.*"}
+   2 {"Timeout":false,"Limit":-1,"Results":9,"Query":"fmt\\.Println"}
+   4 {"Timeout":false,"Limit":-1,"Results":17,"Query":"error"}
+   4 {"Timeout":false,"Limit":10,"Results":10,"Query":"bytes.Buffer'"}
+   4 {"Timeout":false,"Limit":1000,"Results":10,"Query":"bytes.Buffer'"}
+  18 {"Timeout":false,"Limit":-1,"Results":17,"Query":"error'"}
+ 100 {"Timeout":false,"Limit":1000,"Results":10,"Query":"123456789'"}
+ 100 {"Timeout":false,"Limit":1000,"Results":10,"Query":"ac8ac5d63b66b83b90ce41a2d4061635'"}
+ 100 {"Timeout":false,"Limit":1000,"Results":10,"Query":"d97f1d3ff91543[e-f]49.8b07517548877'"}
+ 100 {"Timeout":false,"Limit":1000,"Results":10,"Query":"fmt\\.Error'"}
+ 100 {"Timeout":false,"Limit":1000,"Results":10,"Query":"fmt\\.Print.*'"}
+ 100 {"Timeout":false,"Limit":1000,"Results":10,"Query":"fmt\\.Println'"}
+ 100 {"Timeout":false,"Limit":1000,"Results":7,"Query":"var'"}
+ 200 {"Timeout":false,"Limit":1000,"Results":7,"Query":"error'"}
+1000 {"Timeout":false,"Limit":10,"Results":10,"Query":"123456789'"}
+1000 {"Timeout":false,"Limit":10,"Results":10,"Query":"ac8ac5d63b66b83b90ce41a2d4061635'"}
+1000 {"Timeout":false,"Limit":10,"Results":10,"Query":"d97f1d3ff91543[e-f]49.8b07517548877'"}
+1000 {"Timeout":false,"Limit":10,"Results":10,"Query":"fmt\\.Error'"}
+1000 {"Timeout":false,"Limit":10,"Results":10,"Query":"fmt\\.Print.*'"}
+1000 {"Timeout":false,"Limit":10,"Results":10,"Query":"fmt\\.Println'"}
+1000 {"Timeout":false,"Limit":10,"Results":7,"Query":"var'"}
+1000 {"Timeout":false,"Limit":100,"Results":10,"Query":"123456789'"}
+1000 {"Timeout":false,"Limit":100,"Results":10,"Query":"ac8ac5d63b66b83b90ce41a2d4061635'"}
+1000 {"Timeout":false,"Limit":100,"Results":10,"Query":"bytes.Buffer'"}
+1000 {"Timeout":false,"Limit":100,"Results":10,"Query":"d97f1d3ff91543[e-f]49.8b07517548877'"}
+1000 {"Timeout":false,"Limit":100,"Results":10,"Query":"fmt\\.Error'"}
+1000 {"Timeout":false,"Limit":100,"Results":10,"Query":"fmt\\.Print.*'"}
+1000 {"Timeout":false,"Limit":100,"Results":10,"Query":"fmt\\.Println'"}
+1000 {"Timeout":false,"Limit":100,"Results":7,"Query":"var'"}
+2000 {"Timeout":false,"Limit":10,"Results":7,"Query":"error'"}
+2000 {"Timeout":false,"Limit":100,"Results":7,"Query":"error'"}
+```
+
+#### How many timed out?
+
+```
+$ cat ./query_logs/query-run-2.log ./query_logs/query-run-3.log | go run ./cmd/visualize-query-log/main.go | jq '.[] | select (.Timeout == true)' | jq -c -s '.[]' | wc -l
+       0
+```
+
+(But we should include the last single query which bricked our MacOS installation mentioned previously..)
+
+#### 
+
+CPU usage (150% == one and a half cores) during query execution as visualized by:
+
+```sh
+cat ./docker_stats_logs/query-run-2.log ./docker_stats_logs/query-run-3.log | go run ./cmd/visualize-docker-json-stats/main.go | jq | jp -y '..CPUPerc'
+```
+
+<img width="1253" alt="image" src="https://user-images.githubusercontent.com/3173176/107847580-0f178680-6daa-11eb-8474-afe2f057cedb.png">
+
+Memory usage in MiB during query execution as visualized by:
+
+```sh
+cat ./docker_stats_logs/query-run-2.log ./docker_stats_logs/query-run-3.log | go run ./cmd/visualize-docker-json-stats/main.go | jq | jp -y '..MemUsageMiB'
+```
+
+<img width="1251" alt="image" src="https://user-images.githubusercontent.com/3173176/107847596-30787280-6daa-11eb-979c-b77c3711b948.png">
+
+The large spike towards the end is a result of beginning to execute `query-corpus-unlimited.sh` queries - i.e. ones without any `LIMIT`.
+
 ### Database startup time
 
 Clean startups are almost instantaneous, taking less than a second. 

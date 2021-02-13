@@ -1,0 +1,211 @@
+unlimited: 'error'
+TIME:19:31:52
+query: EXPLAIN ANALYZE select count(id) from (select id from files where contents ~ 'error') as e;
+Timing is on.
+                                                                              QUERY PLAN                                                                              
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Finalize Aggregate  (cost=393577.29..393577.30 rows=1 width=8) (actual time=795416.811..797157.638 rows=1 loops=1)
+   ->  Gather  (cost=393576.87..393577.28 rows=4 width=8) (actual time=795319.249..797153.283 rows=5 loops=1)
+         Workers Planned: 4
+         Workers Launched: 4
+         ->  Partial Aggregate  (cost=392576.87..392576.88 rows=1 width=8) (actual time=795114.855..795116.022 rows=1 loops=5)
+               ->  Parallel Bitmap Heap Scan on files  (cost=3804.19..392287.02 rows=115938 width=8) (actual time=7026.015..792569.628 rows=295896 loops=5)
+                     Recheck Cond: (contents ~ 'error'::text)
+                     Rows Removed by Index Recheck: 86428
+                     Heap Blocks: exact=103793
+                     ->  Bitmap Index Scan on files_contents_trgm_idx  (cost=0.00..3688.25 rows=463753 width=0) (actual time=1969.840..1973.106 rows=1911617 loops=1)
+                           Index Cond: (contents ~ 'error'::text)
+ Planning Time: 901.450 ms
+ JIT:
+   Functions: 27
+   Options: Inlining false, Optimization false, Expressions true, Deforming true
+   Timing: Generation 10.537 ms, Inlining 0.000 ms, Optimization 66.671 ms, Emission 299.647 ms, Total 376.854 ms
+ Execution Time: 797612.973 ms
+(17 rows)
+
+Time: 798608.718 ms (13:18.609)
+TIME:19:45:11
+query: EXPLAIN ANALYZE select count(id) from (select id from files where contents ~ 'error') as e;
+Timing is on.
+                                                                              QUERY PLAN                                                                              
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Finalize Aggregate  (cost=393577.29..393577.30 rows=1 width=8) (actual time=820172.229..822752.484 rows=1 loops=1)
+   ->  Gather  (cost=393576.87..393577.28 rows=4 width=8) (actual time=820114.190..822751.259 rows=5 loops=1)
+         Workers Planned: 4
+         Workers Launched: 4
+         ->  Partial Aggregate  (cost=392576.87..392576.88 rows=1 width=8) (actual time=820016.865..820017.148 rows=1 loops=5)
+               ->  Parallel Bitmap Heap Scan on files  (cost=3804.19..392287.02 rows=115938 width=8) (actual time=8100.973..817531.001 rows=295896 loops=5)
+                     Recheck Cond: (contents ~ 'error'::text)
+                     Rows Removed by Index Recheck: 86428
+                     Heap Blocks: exact=107776
+                     ->  Bitmap Index Scan on files_contents_trgm_idx  (cost=0.00..3688.25 rows=463753 width=0) (actual time=1235.315..1235.319 rows=1911617 loops=1)
+                           Index Cond: (contents ~ 'error'::text)
+ Planning Time: 64361.491 ms
+ JIT:
+   Functions: 27
+   Options: Inlining false, Optimization false, Expressions true, Deforming true
+   Timing: Generation 7.246 ms, Inlining 0.000 ms, Optimization 83.085 ms, Emission 364.882 ms, Total 455.212 ms
+ Execution Time: 823047.755 ms
+(17 rows)
+
+Time: 887517.861 ms (14:47.518)
+unlimited: 'fmt\.Error'
+TIME:19:59:59
+query: EXPLAIN ANALYZE select count(id) from (select id from files where contents ~ 'fmt\.Error') as e;
+Timing is on.
+                                                                      QUERY PLAN                                                                       
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=21181.83..21181.84 rows=1 width=8) (actual time=666526.189..666527.854 rows=1 loops=1)
+   ->  Bitmap Heap Scan on files  (cost=204.15..21133.72 rows=19245 width=8) (actual time=12500.450..665630.177 rows=127897 loops=1)
+         Recheck Cond: (contents ~ 'fmt\.Error'::text)
+         Rows Removed by Index Recheck: 156127
+         Heap Blocks: exact=108202
+         ->  Bitmap Index Scan on files_contents_trgm_idx  (cost=0.00..199.33 rows=19245 width=0) (actual time=1410.211..1410.752 rows=284024 loops=1)
+               Index Cond: (contents ~ 'fmt\.Error'::text)
+ Planning Time: 65791.219 ms
+ Execution Time: 666664.808 ms
+(9 rows)
+
+Time: 732591.663 ms (12:12.592)
+TIME:20:12:12
+query: EXPLAIN ANALYZE select count(id) from (select id from files where contents ~ 'fmt\.Error') as e;
+Timing is on.
+                                                                      QUERY PLAN                                                                       
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=21181.83..21181.84 rows=1 width=8) (actual time=599977.754..599978.880 rows=1 loops=1)
+   ->  Bitmap Heap Scan on files  (cost=204.15..21133.72 rows=19245 width=8) (actual time=21055.953..599106.161 rows=127897 loops=1)
+         Recheck Cond: (contents ~ 'fmt\.Error'::text)
+         Rows Removed by Index Recheck: 156127
+         Heap Blocks: exact=108202
+         ->  Bitmap Index Scan on files_contents_trgm_idx  (cost=0.00..199.33 rows=19245 width=0) (actual time=1226.166..1226.713 rows=284024 loops=1)
+               Index Cond: (contents ~ 'fmt\.Error'::text)
+ Planning Time: 27305.901 ms
+ Execution Time: 600091.776 ms
+(9 rows)
+
+Time: 627637.994 ms (10:27.638)
+unlimited: 'error'
+TIME:20:22:41
+query: EXPLAIN ANALYZE select count(id) from (select id from files where contents ~ 'error') as e;
+Timing is on.
+                                                                              QUERY PLAN                                                                              
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Finalize Aggregate  (cost=393577.29..393577.30 rows=1 width=8) (actual time=771247.630..772882.718 rows=1 loops=1)
+   ->  Gather  (cost=393576.87..393577.28 rows=4 width=8) (actual time=771137.404..772878.440 rows=5 loops=1)
+         Workers Planned: 4
+         Workers Launched: 4
+         ->  Partial Aggregate  (cost=392576.87..392576.88 rows=1 width=8) (actual time=771006.361..771006.400 rows=1 loops=5)
+               ->  Parallel Bitmap Heap Scan on files  (cost=3804.19..392287.02 rows=115938 width=8) (actual time=6897.455..768442.261 rows=295896 loops=5)
+                     Recheck Cond: (contents ~ 'error'::text)
+                     Rows Removed by Index Recheck: 86428
+                     Heap Blocks: exact=105250
+                     ->  Bitmap Index Scan on files_contents_trgm_idx  (cost=0.00..3688.25 rows=463753 width=0) (actual time=1344.291..1344.300 rows=1911617 loops=1)
+                           Index Cond: (contents ~ 'error'::text)
+ Planning Time: 27914.193 ms
+ JIT:
+   Functions: 27
+   Options: Inlining false, Optimization false, Expressions true, Deforming true
+   Timing: Generation 8.751 ms, Inlining 0.000 ms, Optimization 190.959 ms, Emission 895.099 ms, Total 1094.810 ms
+ Execution Time: 773572.314 ms
+(17 rows)
+
+Time: 801652.532 ms (13:21.653)
+TIME:20:36:03
+query: EXPLAIN ANALYZE select count(id) from (select id from files where contents ~ 'error') as e;
+Timing is on.
+                                                                              QUERY PLAN                                                                              
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Finalize Aggregate  (cost=393577.29..393577.30 rows=1 width=8) (actual time=793773.829..796367.552 rows=1 loops=1)
+   ->  Gather  (cost=393576.87..393577.28 rows=4 width=8) (actual time=793646.793..796354.827 rows=5 loops=1)
+         Workers Planned: 4
+         Workers Launched: 4
+         ->  Partial Aggregate  (cost=392576.87..392576.88 rows=1 width=8) (actual time=793525.370..793527.443 rows=1 loops=5)
+               ->  Parallel Bitmap Heap Scan on files  (cost=3804.19..392287.02 rows=115938 width=8) (actual time=5211.036..790832.677 rows=295896 loops=5)
+                     Recheck Cond: (contents ~ 'error'::text)
+                     Rows Removed by Index Recheck: 86428
+                     Heap Blocks: exact=109602
+                     ->  Bitmap Index Scan on files_contents_trgm_idx  (cost=0.00..3688.25 rows=463753 width=0) (actual time=1236.103..1236.109 rows=1911617 loops=1)
+                           Index Cond: (contents ~ 'error'::text)
+ Planning Time: 50066.893 ms
+ JIT:
+   Functions: 27
+   Options: Inlining false, Optimization false, Expressions true, Deforming true
+   Timing: Generation 8.445 ms, Inlining 0.000 ms, Optimization 30.806 ms, Emission 121.380 ms, Total 160.631 ms
+ Execution Time: 796706.598 ms
+(17 rows)
+
+Time: 846909.189 ms (14:06.909)
+unlimited: 'fmt\.Println'
+TIME:20:50:10
+query: EXPLAIN ANALYZE select count(id) from (select id from files where contents ~ 'fmt\.Println') as e;
+Timing is on.
+                                                                    QUERY PLAN                                                                     
+---------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=1137.50..1137.51 rows=1 width=8) (actual time=420221.426..420222.769 rows=1 loops=1)
+   ->  Bitmap Heap Scan on files  (cost=70.14..1135.10 rows=960 width=8) (actual time=14420.555..420057.795 rows=22877 loops=1)
+         Recheck Cond: (contents ~ 'fmt\.Println'::text)
+         Rows Removed by Index Recheck: 22396
+         Heap Blocks: exact=29809
+         ->  Bitmap Index Scan on files_contents_trgm_idx  (cost=0.00..69.90 rows=960 width=0) (actual time=2222.233..2222.950 rows=45273 loops=1)
+               Index Cond: (contents ~ 'fmt\.Println'::text)
+ Planning Time: 69182.624 ms
+ Execution Time: 420257.263 ms
+(9 rows)
+
+Time: 489534.490 ms (08:09.534)
+TIME:20:58:20
+query: EXPLAIN ANALYZE select count(id) from (select id from files where contents ~ 'fmt\.Println') as e;
+Timing is on.
+                                                                    QUERY PLAN                                                                     
+---------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=1137.50..1137.51 rows=1 width=8) (actual time=243415.952..243416.874 rows=1 loops=1)
+   ->  Bitmap Heap Scan on files  (cost=70.14..1135.10 rows=960 width=8) (actual time=4917.961..243257.413 rows=22877 loops=1)
+         Recheck Cond: (contents ~ 'fmt\.Println'::text)
+         Rows Removed by Index Recheck: 22396
+         Heap Blocks: exact=29809
+         ->  Bitmap Index Scan on files_contents_trgm_idx  (cost=0.00..69.90 rows=960 width=0) (actual time=1988.973..1989.132 rows=45273 loops=1)
+               Index Cond: (contents ~ 'fmt\.Println'::text)
+ Planning Time: 9535.846 ms
+ Execution Time: 243441.826 ms
+(9 rows)
+
+Time: 253088.617 ms (04:13.089)
+unlimited: 'fmt\.Print.*'
+TIME:21:02:34
+query: EXPLAIN ANALYZE select count(id) from (select id from files where contents ~ 'fmt\.Print.*') as e;
+Timing is on.
+                                                                      QUERY PLAN                                                                       
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=21181.83..21181.84 rows=1 width=8) (actual time=474436.022..474438.175 rows=1 loops=1)
+   ->  Bitmap Heap Scan on files  (cost=204.15..21133.72 rows=19245 width=8) (actual time=3307.632..474184.424 rows=37320 loops=1)
+         Recheck Cond: (contents ~ 'fmt\.Print.*'::text)
+         Rows Removed by Index Recheck: 191211
+         Heap Blocks: exact=100882
+         ->  Bitmap Index Scan on files_contents_trgm_idx  (cost=0.00..199.33 rows=19245 width=0) (actual time=1821.944..1822.536 rows=228531 loops=1)
+               Index Cond: (contents ~ 'fmt\.Print.*'::text)
+ Planning Time: 7952.650 ms
+ Execution Time: 474616.587 ms
+(9 rows)
+
+Time: 482829.405 ms (08:02.829)
+TIME:21:10:38
+query: EXPLAIN ANALYZE select count(id) from (select id from files where contents ~ 'fmt\.Print.*') as e;
+Timing is on.
+                                                                      QUERY PLAN                                                                       
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=21181.83..21181.84 rows=1 width=8) (actual time=655632.781..655635.401 rows=1 loops=1)
+   ->  Bitmap Heap Scan on files  (cost=204.15..21133.72 rows=19245 width=8) (actual time=19906.662..655369.780 rows=37320 loops=1)
+         Recheck Cond: (contents ~ 'fmt\.Print.*'::text)
+         Rows Removed by Index Recheck: 191211
+         Heap Blocks: exact=100882
+         ->  Bitmap Index Scan on files_contents_trgm_idx  (cost=0.00..199.33 rows=19245 width=0) (actual time=1401.762..1402.749 rows=228531 loops=1)
+               Index Cond: (contents ~ 'fmt\.Print.*'::text)
+ Planning Time: 29314.940 ms
+ Execution Time: 655857.607 ms
+(9 rows)
+
+Time: 685367.935 ms (11:25.368)
+unlimited: 'var'
+TIME:21:22:06
+query: EXPLAIN ANALYZE select count(id) from (select id from files where contents ~ 'var') as e;
+Timing is on.
