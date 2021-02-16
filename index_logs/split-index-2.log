@@ -1,0 +1,731 @@
+Timing is on.
+NOTICE:  relation "files_002_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 62.383 ms
+Timing is on.
+NOTICE:  relation "files_003_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 9.629 ms
+Timing is on.
+NOTICE:  relation "files_000_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 5.452 ms
+Timing is on.
+NOTICE:  relation "files_004_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.064 ms
+Timing is on.
+NOTICE:  relation "files_005_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.134 ms
+Timing is on.
+NOTICE:  relation "files_001_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.843 ms
+Timing is on.
+NOTICE:  relation "files_006_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 5.055 ms
+Timing is on.
+NOTICE:  relation "files_007_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.392 ms
+Timing is on.
+NOTICE:  relation "files_008_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.712 ms
+Timing is on.
+NOTICE:  relation "files_009_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 6.019 ms
+Timing is on.
+NOTICE:  relation "files_010_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.375 ms
+Timing is on.
+NOTICE:  relation "files_012_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 4.959 ms
+Timing is on.
+NOTICE:  relation "files_011_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.035 ms
+Timing is on.
+NOTICE:  relation "files_013_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.096 ms
+Timing is on.
+NOTICE:  relation "files_014_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 6.505 ms
+Timing is on.
+NOTICE:  relation "files_015_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.854 ms
+Timing is on.
+NOTICE:  relation "files_016_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.808 ms
+Timing is on.
+NOTICE:  relation "files_017_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 6.850 ms
+Timing is on.
+NOTICE:  relation "files_018_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.034 ms
+Timing is on.
+NOTICE:  relation "files_019_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.409 ms
+Timing is on.
+NOTICE:  relation "files_020_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 9.891 ms
+Timing is on.
+NOTICE:  relation "files_021_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 5.909 ms
+Timing is on.
+NOTICE:  relation "files_022_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 7.935 ms
+Timing is on.
+NOTICE:  relation "files_025_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.296 ms
+Timing is on.
+NOTICE:  relation "files_024_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.837 ms
+Timing is on.
+NOTICE:  relation "files_023_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.354 ms
+Timing is on.
+NOTICE:  relation "files_027_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.990 ms
+Timing is on.
+NOTICE:  relation "files_026_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.869 ms
+Timing is on.
+NOTICE:  relation "files_028_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 4.574 ms
+Timing is on.
+NOTICE:  relation "files_029_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 4.920 ms
+Timing is on.
+NOTICE:  relation "files_030_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.605 ms
+Timing is on.
+NOTICE:  relation "files_031_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.965 ms
+Timing is on.
+NOTICE:  relation "files_033_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 5.329 ms
+Timing is on.
+NOTICE:  relation "files_032_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.794 ms
+Timing is on.
+NOTICE:  relation "files_035_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.932 ms
+Timing is on.
+NOTICE:  relation "files_034_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 7.096 ms
+Timing is on.
+NOTICE:  relation "files_036_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 7.048 ms
+Timing is on.
+NOTICE:  relation "files_037_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 17.414 ms
+Timing is on.
+NOTICE:  relation "files_039_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 14.768 ms
+Timing is on.
+NOTICE:  relation "files_038_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 7.902 ms
+Timing is on.
+NOTICE:  relation "files_040_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 6.509 ms
+Timing is on.
+NOTICE:  relation "files_042_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 5.927 ms
+Timing is on.
+NOTICE:  relation "files_041_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 4.846 ms
+Timing is on.
+NOTICE:  relation "files_043_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.429 ms
+Timing is on.
+NOTICE:  relation "files_044_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 5.277 ms
+Timing is on.
+NOTICE:  relation "files_045_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.733 ms
+Timing is on.
+NOTICE:  relation "files_046_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 5.398 ms
+Timing is on.
+NOTICE:  relation "files_048_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 9.470 ms
+Timing is on.
+NOTICE:  relation "files_049_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 5.465 ms
+Timing is on.
+NOTICE:  relation "files_047_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 5.866 ms
+Timing is on.
+NOTICE:  relation "files_050_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 27.735 ms
+Timing is on.
+NOTICE:  relation "files_051_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.996 ms
+Timing is on.
+NOTICE:  relation "files_052_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.333 ms
+Timing is on.
+NOTICE:  relation "files_053_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.868 ms
+Timing is on.
+NOTICE:  relation "files_055_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 5.285 ms
+Timing is on.
+NOTICE:  relation "files_054_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.358 ms
+Timing is on.
+NOTICE:  relation "files_056_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.940 ms
+Timing is on.
+NOTICE:  relation "files_057_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.126 ms
+Timing is on.
+NOTICE:  relation "files_058_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 20.265 ms
+Timing is on.
+NOTICE:  relation "files_059_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.083 ms
+Timing is on.
+NOTICE:  relation "files_060_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.401 ms
+Timing is on.
+NOTICE:  relation "files_061_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 5.821 ms
+Timing is on.
+NOTICE:  relation "files_062_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 6.001 ms
+Timing is on.
+NOTICE:  relation "files_063_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 6.125 ms
+Timing is on.
+NOTICE:  relation "files_064_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 5.891 ms
+Timing is on.
+NOTICE:  relation "files_065_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.755 ms
+Timing is on.
+NOTICE:  relation "files_066_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 6.071 ms
+Timing is on.
+NOTICE:  relation "files_068_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.655 ms
+Timing is on.
+NOTICE:  relation "files_067_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.576 ms
+Timing is on.
+NOTICE:  relation "files_069_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 7.013 ms
+Timing is on.
+NOTICE:  relation "files_070_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.898 ms
+Timing is on.
+NOTICE:  relation "files_071_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 4.198 ms
+Timing is on.
+NOTICE:  relation "files_072_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 7.940 ms
+Timing is on.
+NOTICE:  relation "files_073_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 4.849 ms
+Timing is on.
+NOTICE:  relation "files_074_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.118 ms
+Timing is on.
+NOTICE:  relation "files_075_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 20.171 ms
+Timing is on.
+NOTICE:  relation "files_077_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 21.760 ms
+Timing is on.
+NOTICE:  relation "files_076_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 18.273 ms
+Timing is on.
+NOTICE:  relation "files_078_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.896 ms
+Timing is on.
+NOTICE:  relation "files_079_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.705 ms
+Timing is on.
+NOTICE:  relation "files_080_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 6.065 ms
+Timing is on.
+NOTICE:  relation "files_081_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 5.758 ms
+Timing is on.
+NOTICE:  relation "files_082_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.174 ms
+Timing is on.
+NOTICE:  relation "files_083_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 7.552 ms
+Timing is on.
+NOTICE:  relation "files_086_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 4.048 ms
+Timing is on.
+NOTICE:  relation "files_085_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.918 ms
+Timing is on.
+NOTICE:  relation "files_084_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.196 ms
+Timing is on.
+NOTICE:  relation "files_087_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.095 ms
+Timing is on.
+NOTICE:  relation "files_088_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 8.904 ms
+Timing is on.
+NOTICE:  relation "files_089_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 11.154 ms
+Timing is on.
+NOTICE:  relation "files_092_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 6.533 ms
+Timing is on.
+NOTICE:  relation "files_090_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.231 ms
+Timing is on.
+NOTICE:  relation "files_091_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 4.097 ms
+Timing is on.
+NOTICE:  relation "files_093_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 7.085 ms
+Timing is on.
+NOTICE:  relation "files_094_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 6.406 ms
+Timing is on.
+NOTICE:  relation "files_095_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 8.559 ms
+Timing is on.
+NOTICE:  relation "files_096_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 7.015 ms
+Timing is on.
+NOTICE:  relation "files_097_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.711 ms
+Timing is on.
+NOTICE:  relation "files_098_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 4.778 ms
+Timing is on.
+NOTICE:  relation "files_099_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 5.102 ms
+Timing is on.
+NOTICE:  relation "files_100_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 4.068 ms
+Timing is on.
+NOTICE:  relation "files_101_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.413 ms
+Timing is on.
+NOTICE:  relation "files_102_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 6.719 ms
+Timing is on.
+NOTICE:  relation "files_103_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 5.568 ms
+Timing is on.
+NOTICE:  relation "files_104_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.610 ms
+Timing is on.
+NOTICE:  relation "files_106_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.888 ms
+Timing is on.
+NOTICE:  relation "files_105_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.073 ms
+Timing is on.
+NOTICE:  relation "files_107_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 6.923 ms
+Timing is on.
+NOTICE:  relation "files_108_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.190 ms
+Timing is on.
+NOTICE:  relation "files_109_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.580 ms
+Timing is on.
+NOTICE:  relation "files_110_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.296 ms
+Timing is on.
+Timing is on.
+NOTICE:  relation "files_112_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.686 ms
+Timing is on.
+Timing is on.
+Timing is on.
+NOTICE:  relation "files_116_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 4.038 ms
+Timing is on.
+Timing is on.
+NOTICE:  relation "files_117_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.973 ms
+Timing is on.
+Timing is on.
+NOTICE:  relation "files_119_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 3.242 ms
+Timing is on.
+NOTICE:  relation "files_120_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 6.837 ms
+Timing is on.
+NOTICE:  relation "files_121_contents_trgm_idx" already exists, skipping
+CREATE INDEX
+Time: 2.241 ms
+Timing is on.
+ERROR:  duplicate key value violates unique constraint "pg_class_relname_nsp_index"
+DETAIL:  Key (relname, relnamespace)=(files_111_contents_trgm_idx, 2200) already exists.
+Time: 116328.810 ms (01:56.329)
+2021/02/15 14:00:33 ERROR running 'CREATE INDEX IF NOT EXISTS files_111_contents_trgm_idx ON files_111 USING GIN (contents gin_trgm_ops);': exit status 1
+Timing is on.
+ERROR:  duplicate key value violates unique constraint "pg_class_relname_nsp_index"
+DETAIL:  Key (relname, relnamespace)=(files_123_contents_trgm_idx, 2200) already exists.
+Time: 41452.631 ms (00:41.453)
+2021/02/15 14:01:16 ERROR running 'CREATE INDEX IF NOT EXISTS files_123_contents_trgm_idx ON files_123 USING GIN (contents gin_trgm_ops);': exit status 1
+Timing is on.
+ERROR:  duplicate key value violates unique constraint "pg_class_relname_nsp_index"
+DETAIL:  Key (relname, relnamespace)=(files_118_contents_trgm_idx, 2200) already exists.
+Time: 185210.820 ms (03:05.211)
+2021/02/15 14:01:44 ERROR running 'CREATE INDEX IF NOT EXISTS files_118_contents_trgm_idx ON files_118 USING GIN (contents gin_trgm_ops);': exit status 1
+Timing is on.
+ERROR:  duplicate key value violates unique constraint "pg_class_relname_nsp_index"
+DETAIL:  Key (relname, relnamespace)=(files_114_contents_trgm_idx, 2200) already exists.
+Time: 238746.256 ms (03:58.746)
+2021/02/15 14:02:37 ERROR running 'CREATE INDEX IF NOT EXISTS files_114_contents_trgm_idx ON files_114 USING GIN (contents gin_trgm_ops);': exit status 1
+Timing is on.
+ERROR:  duplicate key value violates unique constraint "pg_class_relname_nsp_index"
+DETAIL:  Key (relname, relnamespace)=(files_115_contents_trgm_idx, 2200) already exists.
+Time: 268970.463 ms (04:28.970)
+2021/02/15 14:03:08 ERROR running 'CREATE INDEX IF NOT EXISTS files_115_contents_trgm_idx ON files_115 USING GIN (contents gin_trgm_ops);': exit status 1
+Timing is on.
+ERROR:  duplicate key value violates unique constraint "pg_class_relname_nsp_index"
+DETAIL:  Key (relname, relnamespace)=(files_113_contents_trgm_idx, 2200) already exists.
+Time: 671441.020 ms (11:11.441)
+2021/02/15 14:09:50 ERROR running 'CREATE INDEX IF NOT EXISTS files_113_contents_trgm_idx ON files_113 USING GIN (contents gin_trgm_ops);': exit status 1
+Timing is on.
+ERROR:  duplicate key value violates unique constraint "pg_class_relname_nsp_index"
+DETAIL:  Key (relname, relnamespace)=(files_122_contents_trgm_idx, 2200) already exists.
+Time: 845706.951 ms (14:05.707)
+2021/02/15 14:12:46 ERROR running 'CREATE INDEX IF NOT EXISTS files_122_contents_trgm_idx ON files_122 USING GIN (contents gin_trgm_ops);': exit status 1
+Timing is on.
+CREATE INDEX
+Time: 715398.096 ms (11:55.398)
+Timing is on.
+CREATE INDEX
+Time: 674217.178 ms (11:14.217)
+Timing is on.
+CREATE INDEX
+Time: 850455.248 ms (14:10.455)
+Timing is on.
+CREATE INDEX
+Time: 244320.599 ms (04:04.321)
+Timing is on.
+CREATE INDEX
+Time: 108481.560 ms (01:48.482)
+Timing is on.
+CREATE INDEX
+Time: 203806.280 ms (03:23.806)
+Timing is on.
+CREATE INDEX
+Time: 345585.250 ms (05:45.585)
+Timing is on.
+CREATE INDEX
+Time: 596800.005 ms (09:56.800)
+Timing is on.
+CREATE INDEX
+Time: 167491.713 ms (02:47.492)
+Timing is on.
+CREATE INDEX
+Time: 140917.679 ms (02:20.918)
+Timing is on.
+CREATE INDEX
+Time: 190564.754 ms (03:10.565)
+Timing is on.
+CREATE INDEX
+Time: 174045.640 ms (02:54.046)
+Timing is on.
+CREATE INDEX
+Time: 148061.707 ms (02:28.062)
+Timing is on.
+CREATE INDEX
+Time: 248725.504 ms (04:08.726)
+Timing is on.
+CREATE INDEX
+Time: 247333.254 ms (04:07.333)
+Timing is on.
+CREATE INDEX
+Time: 169831.837 ms (02:49.832)
+Timing is on.
+CREATE INDEX
+Time: 265911.572 ms (04:25.912)
+Timing is on.
+CREATE INDEX
+Time: 237365.959 ms (03:57.366)
+Timing is on.
+CREATE INDEX
+Time: 211271.869 ms (03:31.272)
+Timing is on.
+CREATE INDEX
+Time: 211144.585 ms (03:31.145)
+Timing is on.
+CREATE INDEX
+Time: 236067.011 ms (03:56.067)
+Timing is on.
+CREATE INDEX
+Time: 165412.119 ms (02:45.412)
+Timing is on.
+CREATE INDEX
+Time: 119135.750 ms (01:59.136)
+Timing is on.
+CREATE INDEX
+Time: 140493.630 ms (02:20.494)
+Timing is on.
+CREATE INDEX
+Time: 261960.923 ms (04:21.961)
+Timing is on.
+CREATE INDEX
+Time: 1779332.270 ms (29:39.332)
+Timing is on.
+CREATE INDEX
+Time: 16593.427 ms (00:16.593)
+Timing is on.
+CREATE INDEX
+Time: 253533.789 ms (04:13.534)
+Timing is on.
+CREATE INDEX
+Time: 15827.257 ms (00:15.827)
+Timing is on.
+CREATE INDEX
+Time: 14414.037 ms (00:14.414)
+Timing is on.
+CREATE INDEX
+Time: 17327.608 ms (00:17.328)
+Timing is on.
+CREATE INDEX
+Time: 15595.653 ms (00:15.596)
+Timing is on.
+CREATE INDEX
+Time: 14393.059 ms (00:14.393)
+CREATE INDEX
+Time: 300376.929 ms (05:00.377)
+Timing is on.
+Timing is on.
+CREATE INDEX
+Time: 306190.342 ms (05:06.190)
+Timing is on.
+CREATE INDEX
+Time: 228608.830 ms (03:48.609)
+Timing is on.
+CREATE INDEX
+Time: 82416.264 ms (01:22.416)
+Timing is on.
+CREATE INDEX
+Time: 134289.766 ms (02:14.290)
+Timing is on.
+CREATE INDEX
+Time: 124899.702 ms (02:04.900)
+Timing is on.
+CREATE INDEX
+Time: 282508.624 ms (04:42.509)
+Timing is on.
+CREATE INDEX
+Time: 476366.712 ms (07:56.367)
+Timing is on.
+CREATE INDEX
+Time: 152586.286 ms (02:32.586)
+Timing is on.
+CREATE INDEX
+Time: 200139.374 ms (03:20.139)
+Timing is on.
+CREATE INDEX
+Time: 586121.224 ms (09:46.121)
+Timing is on.
+CREATE INDEX
+Time: 536980.748 ms (08:56.981)
+CREATE INDEX
+Time: 18688.208 ms (00:18.688)
+Timing is on.
+Timing is on.
+CREATE INDEX
+Time: 84419.200 ms (01:24.419)
+Timing is on.
+CREATE INDEX
+Time: 642997.804 ms (10:42.998)
+Timing is on.
+CREATE INDEX
+Time: 213045.154 ms (03:33.045)
+Timing is on.
+CREATE INDEX
+Time: 57330.280 ms (00:57.330)
+Timing is on.
+CREATE INDEX
+Time: 227833.238 ms (03:47.833)
+Timing is on.
+CREATE INDEX
+Time: 102063.108 ms (01:42.063)
+Timing is on.
+CREATE INDEX
+Time: 89912.262 ms (01:29.912)
+Timing is on.
+CREATE INDEX
+Time: 289095.393 ms (04:49.095)
+Timing is on.
+CREATE INDEX
+Time: 271177.033 ms (04:31.177)
+Timing is on.
+CREATE INDEX
+Time: 231225.635 ms (03:51.226)
+Timing is on.
+CREATE INDEX
+Time: 407143.416 ms (06:47.143)
+Timing is on.
+CREATE INDEX
+Time: 344499.945 ms (05:44.500)
+Timing is on.
+CREATE INDEX
+Time: 86684.906 ms (01:26.685)
+Timing is on.
+CREATE INDEX
+Time: 151638.074 ms (02:31.638)
+Timing is on.
+CREATE INDEX
+Time: 123305.828 ms (02:03.306)
+Timing is on.
+CREATE INDEX
+Time: 102000.675 ms (01:42.001)
+Timing is on.
+CREATE INDEX
+Time: 251316.798 ms (04:11.317)
+Timing is on.
+CREATE INDEX
+Time: 449055.188 ms (07:29.055)
+Timing is on.
+CREATE INDEX
+Time: 58303.132 ms (00:58.303)
+Timing is on.
+CREATE INDEX
+Time: 64620.986 ms (01:04.621)
+Timing is on.
+CREATE INDEX
+Time: 39.334 ms
+Timing is on.
+CREATE INDEX
+Time: 37.224 ms
+Timing is on.
+CREATE INDEX
+Time: 35.138 ms
+Timing is on.
+CREATE INDEX
+Time: 30.264 ms
+Timing is on.
+CREATE INDEX
+Time: 35.434 ms
+CREATE INDEX
+Time: 11670.936 ms (00:11.671)
+CREATE INDEX
+Time: 117109.166 ms (01:57.109)
+CREATE INDEX
+Time: 133308.353 ms (02:13.308)
+CREATE INDEX
+Time: 191067.059 ms (03:11.067)
+CREATE INDEX
+Time: 213108.826 ms (03:33.109)

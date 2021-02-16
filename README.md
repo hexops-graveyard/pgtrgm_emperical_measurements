@@ -99,7 +99,7 @@ postgres=# SELECT filepath FROM files WHERE contents ~ 'use strict';
 (1 row)
 ```
 
-This will take around ~8 hours on a 2020 Macbook Pro i9 w/ 16G memory.
+This will take around ~8 hours on a 2020 Macbook Pro i9 (8 physical cores, 16 virtual) w/ 16G memory.
 
 On-disk size of the entire DB at this point will be 101G.
 
@@ -184,7 +184,7 @@ cat ./docker_stats_logs/configuration-failure-1.log | go run ./cmd/visualize-doc
 
 <img width="981" alt="image" src="https://user-images.githubusercontent.com/3173176/107313722-56bbac80-6a50-11eb-94c7-8e13ea095053.png">
 
-CPU usage percentage (150% indicates "one and a half CPU cores") as reported by `docker stats` over time rendered via:
+CPU usage percentage (150% indicates "one and a half virtual CPU cores") as reported by `docker stats` over time rendered via:
 
 ```
 cat ./docker_stats_logs/configuration-failure-1.log | go run ./cmd/visualize-docker-json-stats/main.go --trim-end=32000 | jq | jp -y '..CPUPerc'
@@ -266,7 +266,7 @@ cat ./docker_stats_logs/configuration-failure-2.log | go run ./cmd/visualize-doc
 
 <img width="980" alt="image" src="https://user-images.githubusercontent.com/3173176/107314104-350ef500-6a51-11eb-909f-2f1b524d29b2.png">
 
-CPU usage percentage (150% indicates "one and a half CPU cores") as reported by `docker stats` over time rendered via:
+CPU usage percentage (150% indicates "one and a half virtual CPU cores") as reported by `docker stats` over time rendered via:
 
 ```
 cat ./docker_stats_logs/configuration-failure-2.log | go run ./cmd/visualize-docker-json-stats/main.go | jq | jp -y '..CPUPerc'
@@ -362,7 +362,7 @@ cat ./docker_stats_logs/configuration-3.log | go run ./cmd/visualize-docker-json
 
 <img width="980" alt="image" src="https://user-images.githubusercontent.com/3173176/107315387-ce3f0b00-6a53-11eb-886c-410f000f73bd.png">
 
-CPU usage percentage (150% indicates "one and a half CPU cores") as reported by `docker stats` over time rendered via:
+CPU usage percentage (150% indicates "one and a half virtual CPU cores") as reported by `docker stats` over time rendered via:
 
 ```
 cat ./docker_stats_logs/configuration-3.log | go run ./cmd/visualize-docker-json-stats/main.go --trim-end=0 | jq | jp -y '..CPUPerc'
@@ -391,8 +391,8 @@ ALTER DATABASE postgres SET statement_timeout = '300s';
 
 Then begin querying the corpus:
 
-```sh
-./query-corpus.sh
+```
+./query-corpus.sh &> query_logs/query-run-1.log
 ```
 
 ## Query performance
@@ -406,7 +406,7 @@ We started queries at 12:42PM MST using:
 - Find the exact SQL queries we ran in `query_logs/query-run-1.log`.
 - Find the `docker stats` measured during query execution in `docker_stats_logs/query-run-1.log`.
 
-CPU usage (150% == one and a half cores) during query execution as visualized by:
+CPU usage (150% == one and a half virtual cores) during query execution as visualized by:
 
 ```sh
 cat ./docker_stats_logs/query-run-1.log | go run ./cmd/visualize-docker-json-stats/main.go --trim-end=9000 | jq | jp -y '..CPUPerc'
@@ -585,7 +585,7 @@ $ cat ./query_logs/query-run-2.log ./query_logs/query-run-3.log | go run ./cmd/v
 
 #### CPU/memory usage
 
-CPU usage (150% == one and a half cores) during query execution as visualized by:
+CPU usage (150% == one and a half virtual cores) during query execution as visualized by:
 
 ```sh
 cat ./docker_stats_logs/query-run-2.log ./docker_stats_logs/query-run-3.log | go run ./cmd/visualize-docker-json-stats/main.go | jq | jp -y '..CPUPerc'
@@ -701,3 +701,270 @@ postgres=# \d+
  public | files_id_seq | sequence | postgres | permanent   | 8192 bytes | 
 (2 rows)
 ```
+
+## Table splitting
+
+We did a brief experiment with table splitting to try and increase Postgres's use of multiple CPU cores, and to reduce the number of row rechecks caused by trigram false positive matches.
+
+First we got the total number of rows:
+
+```sql
+postgres=# select count(*) from files;
+  count  
+---------
+ 9720910
+(1 row)
+```
+
+Based on this, we determined that we would try 200 tables each with 50,000 rows max. We generated the queries to create the tables:
+
+```sql
+$ go run ./cmd/tablesplitgen/main.go create
+CREATE TABLE files_000 AS SELECT * FROM files WHERE id > 0 AND id < 50000;
+CREATE TABLE files_001 AS SELECT * FROM files WHERE id > 50000 AND id < 100000;
+CREATE TABLE files_002 AS SELECT * FROM files WHERE id > 100000 AND id < 150000;
+CREATE TABLE files_003 AS SELECT * FROM files WHERE id > 150000 AND id < 200000;
+CREATE TABLE files_004 AS SELECT * FROM files WHERE id > 200000 AND id < 250000;
+...
+```
+
+And ran those after unsetting the statement timeout:
+
+```sql
+ALTER DATABASE postgres SET statement_timeout = default;
+```
+
+Creation of these tables took around ~20-40s each - about two hours in total.
+
+We then began recording docker stats:
+
+```
+OUT=docker_stats_logs/split-index-1.log ./capture-docker-stats.sh
+```
+
+And used a program to generate and run the SQL statement for indexing, e.g.:
+
+```sql
+CREATE INDEX IF NOT EXISTS files_000_contents_trgm_idx ON files USING GIN (contents gin_trgm_ops);
+```
+
+In parallel (8 at a time), for all 200 tables:
+
+```sh
+PARALLEL=8 go run ./cmd/tablesplitgen/main.go index &> ./index_logs/split-index-1.log
+```
+
+This failed due to an OOM about half way through at around 117 tables indexed, see `index_logs/split-index-1.log`. We then reran with 6 workers and it succeeded (one of the benefits of this approach is we did not have to reindex those 117 tables that did completed).
+
+See `docker_stats_logs/split-index-1.log` for how long it took and CPU/memory usage, which did consume multiple CPU cores.
+
+## Performance gains from table splitting
+
+We took a representative sample of a slow query that previously took 27.6s:
+
+```
+query: EXPLAIN ANALYZE select count(id) from (select id from files where contents ~ 'd97f1d3ff91543[e-f]49.8b07517548877' limit 1000) as e;
+Timing is on.
+                                                                     QUERY PLAN                                                                      
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=1209.80..1209.81 rows=1 width=8) (actual time=27670.917..27670.972 rows=1 loops=1)
+   ->  Limit  (cost=132.84..1197.80 rows=960 width=8) (actual time=27670.904..27670.948 rows=0 loops=1)
+         ->  Bitmap Heap Scan on files  (cost=132.84..1197.80 rows=960 width=8) (actual time=27670.894..27670.907 rows=0 loops=1)
+               Recheck Cond: (contents ~ 'd97f1d3ff91543[e-f]49.8b07517548877'::text)
+               Rows Removed by Index Recheck: 9838
+               Heap Blocks: exact=5379
+               ->  Bitmap Index Scan on files_contents_trgm_idx  (cost=0.00..132.60 rows=960 width=0) (actual time=38.235..38.239 rows=9838 loops=1)
+                     Index Cond: (contents ~ 'd97f1d3ff91543[e-f]49.8b07517548877'::text)
+ Planning Time: 36.870 ms
+ Execution Time: 27671.854 ms
+(10 rows)
+```
+
+We then wrote a small program which starts N workers and in parallel executes a query against all 200 tables (ordered), until it finds the specified limit of results - finding the previously 27.6s query now takes only 7.1s to find no results:
+
+```
+$ DATABASE=postgres://postgres@127.0.0.1:5432/postgres PARALLEL=8 go run ./cmd/tablesplitgen/main.go query 'd97f1d3ff91543[e-f]49.8b07517548877' 1000 200
+...
+0 results in 7140ms
+```
+
+We found that higher numbers for `PARALLEL` generally improved query time, and so we raised postgres.conf `max_connections` to 128 to allow for higher number of parallel testing. Some brief testing showed that around 32 parallel connections, we no longer saw performance gains and the query executed in 5738ms.
+
+### Take 2
+
+We also tried another query which was previously quite slow, taking 27.3s:
+
+```
+query: EXPLAIN ANALYZE select count(id) from (select id from files where contents ~ 'ac8ac5d63b66b83b90ce41a2d4061635' limit 10) as e;
+Timing is on.
+                                                                      QUERY PLAN                                                                      
+------------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=144.06..144.07 rows=1 width=8) (actual time=27379.079..27379.110 rows=1 loops=1)
+   ->  Limit  (cost=132.84..143.94 rows=10 width=8) (actual time=27379.067..27379.087 rows=0 loops=1)
+         ->  Bitmap Heap Scan on files  (cost=132.84..1197.80 rows=960 width=8) (actual time=27379.038..27379.050 rows=0 loops=1)
+               Recheck Cond: (contents ~ 'ac8ac5d63b66b83b90ce41a2d4061635'::text)
+               Rows Removed by Index Recheck: 10166
+               Heap Blocks: exact=5247
+               ->  Bitmap Index Scan on files_contents_trgm_idx  (cost=0.00..132.60 rows=960 width=0) (actual time=41.966..41.970 rows=10166 loops=1)
+                     Index Cond: (contents ~ 'ac8ac5d63b66b83b90ce41a2d4061635'::text)
+ Planning Time: 33.703 ms
+ Execution Time: 27379.786 ms
+(10 rows)
+```
+
+With table splitting, it takes just 7s now:
+
+```
+$ DATABASE=postgres://postgres@127.0.0.1:5432/postgres PARALLEL=32 go run ./cmd/tablesplitgen/main.go query 'ac8ac5d63b66b83b90ce41a2d4061635' 10 200
+...
+0 results in 6915ms
+```
+
+### Take 3
+
+We also tried on a query that was relatively fast before, only 500ms:
+
+```
+query: EXPLAIN ANALYZE select count(id) from (select id from files where contents ~ 'fmt\.Print.*' limit 10) as e;
+Timing is on.
+                                                                        QUERY PLAN                                                                         
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=215.15..215.16 rows=1 width=8) (actual time=557.535..557.625 rows=1 loops=1)
+   ->  Limit  (cost=204.15..215.02 rows=10 width=8) (actual time=278.488..557.549 rows=10 loops=1)
+         ->  Bitmap Heap Scan on files  (cost=204.15..21133.72 rows=19245 width=8) (actual time=278.479..557.364 rows=10 loops=1)
+               Recheck Cond: (contents ~ 'fmt\.Print.*'::text)
+               Rows Removed by Index Recheck: 345
+               Heap Blocks: exact=230
+               ->  Bitmap Index Scan on files_contents_trgm_idx  (cost=0.00..199.33 rows=19245 width=0) (actual time=229.300..229.338 rows=228531 loops=1)
+                     Index Cond: (contents ~ 'fmt\.Print.*'::text)
+ Planning Time: 31.950 ms
+ Execution Time: 560.100 ms
+(10 rows)
+```
+
+It now executes in 177-255ms:
+
+```
+$ DATABASE=postgres://postgres@127.0.0.1:5432/postgres PARALLEL=32 go run ./cmd/tablesplitgen/main.go query 'fmt\.Print.*' 10 200
+...
+0 results in 191ms
+```
+
+### More exhaustive split-table benchmarking
+
+We clearly needed more representative data, so we did a full corpus query benchmark using:
+
+```sh
+OUT=docker_stats_logs/query-run-split-index-1.log ./capture-docker-stats.sh
+```
+
+```sql
+ALTER DATABASE postgres SET statement_timeout = '3600s';
+```
+
+```
+./query-split-corpus.sh &> query_logs/query-run-split-index-1.log
+```
+
+
+#### What queries were ran?
+
+Total number of queries ran was 350 (to save on time, we only ran a smaller number of searches - 10 per unique search - compared to our prior 20k. We found this still gave a generally reliable sample of performance):
+
+```
+$ cat ./query_logs/query-run-split-index-1.log | go run ./cmd/visualize-query-log/main.go | jq -c '.[] | {Timeout: .Timeout, Limit: .Limit, Results: .Rows, Query: .Query}' | wc -l
+     350
+```
+
+Exact numbers of each query type ran:
+
+```
+$ cat ./query_logs/query-run-split-index-1.log | go run ./cmd/visualize-query-log/main.go | jq -c '.[] | {Timeout: .Timeout, Limit: .Limit, Results: .Rows, Query: .Query}' | sort | uniq -c | sort
+   1 {"Timeout":false,"Limit":100,"Results":110,"Query":"fmt\\.Println"}
+   1 {"Timeout":false,"Limit":1000,"Results":1011,"Query":"fmt\\.Println"}
+   1 {"Timeout":false,"Limit":1000,"Results":1031,"Query":"fmt\\.Print.*"}
+   1 {"Timeout":false,"Limit":1000,"Results":1031,"Query":"fmt\\.Println"}
+   1 {"Timeout":false,"Limit":1000,"Results":1035,"Query":"fmt\\.Print.*"}
+   1 {"Timeout":false,"Limit":1000,"Results":1573,"Query":"123456789"}
+   1 {"Timeout":false,"Limit":1000,"Results":1640,"Query":"fmt\\.Println"}
+   1 {"Timeout":false,"Limit":1000,"Results":1784,"Query":"fmt\\.Println"}
+   1 {"Timeout":false,"Limit":1000,"Results":1995,"Query":"bytes.Buffer"}
+   2 {"Timeout":false,"Limit":1000,"Results":1004,"Query":"fmt\\.Error"}
+   3 {"Timeout":false,"Limit":1000,"Results":1036,"Query":"fmt\\.Print.*"}
+   4 {"Timeout":false,"Limit":1000,"Results":1052,"Query":"123456789"}
+   5 {"Timeout":false,"Limit":1000,"Results":1000,"Query":"123456789"}
+   5 {"Timeout":false,"Limit":1000,"Results":1029,"Query":"fmt\\.Print.*"}
+   6 {"Timeout":false,"Limit":1000,"Results":1000,"Query":"fmt\\.Println"}
+   8 {"Timeout":false,"Limit":1000,"Results":1000,"Query":"fmt\\.Error"}
+   9 {"Timeout":false,"Limit":100,"Results":100,"Query":"fmt\\.Println"}
+   9 {"Timeout":false,"Limit":1000,"Results":1002,"Query":"bytes.Buffer"}
+  10 {"Timeout":false,"Limit":-1,"Results":127895,"Query":"fmt\\.Error"}
+  10 {"Timeout":false,"Limit":-1,"Results":22876,"Query":"fmt\\.Println"}
+  10 {"Timeout":false,"Limit":-1,"Results":37319,"Query":"fmt\\.Print.*"}
+  10 {"Timeout":false,"Limit":10,"Results":0,"Query":"ac8ac5d63b66b83b90ce41a2d4061635"}
+  10 {"Timeout":false,"Limit":10,"Results":0,"Query":"d97f1d3ff91543[e-f]49.8b07517548877"}
+  10 {"Timeout":false,"Limit":10,"Results":10,"Query":"123456789"}
+  10 {"Timeout":false,"Limit":10,"Results":10,"Query":"bytes.Buffer"}
+  10 {"Timeout":false,"Limit":10,"Results":10,"Query":"fmt\\.Error"}
+  10 {"Timeout":false,"Limit":10,"Results":10,"Query":"fmt\\.Print.*"}
+  10 {"Timeout":false,"Limit":10,"Results":10,"Query":"fmt\\.Println"}
+  10 {"Timeout":false,"Limit":10,"Results":10,"Query":"var"}
+  10 {"Timeout":false,"Limit":100,"Results":0,"Query":"ac8ac5d63b66b83b90ce41a2d4061635"}
+  10 {"Timeout":false,"Limit":100,"Results":0,"Query":"d97f1d3ff91543[e-f]49.8b07517548877"}
+  10 {"Timeout":false,"Limit":100,"Results":100,"Query":"123456789"}
+  10 {"Timeout":false,"Limit":100,"Results":100,"Query":"bytes.Buffer"}
+  10 {"Timeout":false,"Limit":100,"Results":100,"Query":"fmt\\.Error"}
+  10 {"Timeout":false,"Limit":100,"Results":100,"Query":"fmt\\.Print.*"}
+  10 {"Timeout":false,"Limit":100,"Results":100,"Query":"var"}
+  10 {"Timeout":false,"Limit":1000,"Results":0,"Query":"ac8ac5d63b66b83b90ce41a2d4061635"}
+  10 {"Timeout":false,"Limit":1000,"Results":0,"Query":"d97f1d3ff91543[e-f]49.8b07517548877"}
+  10 {"Timeout":false,"Limit":1000,"Results":1000,"Query":"var"}
+  20 {"Timeout":false,"Limit":-1,"Results":1479452,"Query":"error"}
+  20 {"Timeout":false,"Limit":10,"Results":10,"Query":"error"}
+  20 {"Timeout":false,"Limit":100,"Results":100,"Query":"error"}
+  20 {"Timeout":false,"Limit":1000,"Results":1000,"Query":"error"}
+```
+
+#### How many timed out?
+
+```
+$ cat ./query_logs/query-run-split-index-1.log | go run ./cmd/visualize-query-log/main.go | jq '.[] | select (.Timeout == true)' | jq -c -s '.[]' | wc -l
+       0
+```
+
+(But we should include the last single query which bricked our MacOS installation mentioned previously..)
+
+#### CPU/memory usage
+
+CPU usage (150% == one and a half virtual cores) during query execution as visualized by:
+
+```sh
+$ cat ./docker_stats_logs/query-run-split-index-1.log | go run ./cmd/visualize-docker-json-stats/main.go --trim-end=7700 | jq | jp -y '..CPUPerc'
+```
+
+<img width="1144" alt="image" src="https://user-images.githubusercontent.com/3173176/108114005-79078880-7055-11eb-9f55-bc4ca65c4808.png">
+
+Of note here is that:
+
+2. We see an average of around ~1600% CPU used - this indicates we are actually using 100% of the CPU (the i9 has 8 physical cores, 16 virtual.) Compare this to the fact that our prior test typically only used 1 virtual CPU core.
+1. Due to the way Docker projects CPU usage based on delta measurements, during great spikes of CPU utilization the recorded measurement can exceed 1600% ("16 virtual cores 100% utilized").
+
+Memory usage in MiB during query execution as visualized by:
+
+```sh
+$ cat ./docker_stats_logs/query-run-split-index-1.log | go run ./cmd/visualize-docker-json-stats/main.go --trim-end=7700 | jq | jp -y '..MemUsageMiB'
+```
+
+<img width="1143" alt="image" src="https://user-images.githubusercontent.com/3173176/108115193-04354e00-7057-11eb-9782-8d3125c122e1.png">
+
+Of note here is that we generally use higher amounts of memory than before, around ~380 MiB on average.
+
+#### Other measurements
+
+We can determine how many queries executed in under a time bucket using e.g.:
+
+```
+$ cat ./query_logs/query-run-split-index-1.log | go run ./cmd/visualize-query-log/main.go | jq '.[] | select (.ExecutionTimeMs < 25000)' | jq -c -s '.[]' | wc -l
+```
+
+Note that we did not record planning time or index rechecks for these queries.

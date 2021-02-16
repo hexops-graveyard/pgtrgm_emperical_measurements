@@ -53,14 +53,19 @@ func main() {
 			s := strings.TrimPrefix(line, "BEGIN ./query-corpus-")
 			s = strings.TrimSuffix(s, "\r")
 			s = strings.TrimSuffix(s, ".sh")
-			if s == "unlimited" {
-				limit = -1
-			} else {
-				limit, _ = strconv.ParseFloat(s, 64)
-			}
 		case strings.HasPrefix(line, "limit ") || strings.HasPrefix(line, "unlimited"):
 			current.Query = strings.Split(line, ": '")[1]
 			current.Query = current.Query[:len(current.Query)-1]
+			if strings.HasPrefix(line, "unlimited") {
+				limit = -1
+			} else {
+				fields := strings.Fields(line) // ["limit", "10:", "'error'"]
+				limitStr := strings.TrimSuffix(fields[1], ":")
+				limit, err = strconv.ParseFloat(limitStr, 64)
+				if err != nil {
+					panic(err)
+				}
+			}
 		case strings.Contains(line, "Rows Removed by Index Recheck: "):
 			s := strings.TrimSpace(line)
 			s = strings.TrimPrefix(s, "Rows Removed by Index Recheck: ")
@@ -90,6 +95,17 @@ func main() {
 			s := strings.TrimPrefix(line, "(")
 			s = strings.Split(s, " ")[0]
 			current.Rows, _ = strconv.ParseFloat(s, 64)
+			results = append(results, current)
+		case strings.Contains(line, " results in "):
+			fields := strings.Fields(line) // ["10", "results", "in", "170ms"]
+			current.Rows, err = strconv.ParseFloat(fields[0], 64)
+			if err != nil {
+				panic(err)
+			}
+			current.ExecutionTimeMs, err = strconv.ParseFloat(strings.TrimSuffix(fields[3], "ms"), 64)
+			if err != nil {
+				panic(err)
+			}
 			results = append(results, current)
 		case strings.HasPrefix(line, "ERROR:"):
 			if strings.Contains(line, "canceling statement due to statement timeout") {
