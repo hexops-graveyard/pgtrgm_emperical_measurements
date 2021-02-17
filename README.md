@@ -2,11 +2,13 @@
 
 This repository contains **extensive, verbose, detailed** information about the behavior of pg_trgm at large scales, particularly for regex search.
 
-Before viewing this repository, you will likely prefer to read the blog post format first:
+This repository shares how we performed our empirical measurements, for reproducibility by others.
+
+## Article / paper
+
+Before viewing this repository, you will likely prefer to read the article which is far less verbose and summarizes the findings more nicely:
 
 ["Postgres regex search over 10,000 GitHub repositories"](https://devlog.hexops.com/2021/postgres-regex-search-over-10000-github-repositories)
-
-This repository shares how we performed our empirical measurements, for reproducibility by others.
 
 ## Overview
 
@@ -866,6 +868,13 @@ ALTER DATABASE postgres SET statement_timeout = '3600s';
 ./query-split-corpus.sh &> query_logs/query-run-split-index-1.log
 ```
 
+#### Indexing perf
+
+We saw many benefits of indexing multiple smaller tables:
+
+* When we encountered and OOM or ran out of disk space, all indexing progress up to that point was not lost.
+* Queries could be (although we didn't) executed at the same time as indexing (on tables that have been indexed.)
+* 
 
 #### What queries were ran?
 
