@@ -977,3 +977,245 @@ $ cat ./query_logs/query-run-split-index-1.log | go run ./cmd/visualize-query-lo
 ```
 
 Note that we did not record planning time or index rechecks for these queries.
+
+# Native Postgres tests
+
+## Postgres setup & configuration
+
+We installed Postgres natively on the Mac to test for differences between native FS and `osxfs` (Docker driver) differences. We could have tested with Docker volumes (instead of bind mounts) to achieve the same goal, but felt "Postgres native on Mac" would give a more direct answer to "Does Docker introduce overheads?"
+
+We installed it through brew:
+
+```
+brew install postgresql@13
+```
+
+To ensure the test is otherwise identical to what we ran in Docker, we:
+
+* Confirmed that we are using the same `en_US.utf8` locale (Docker) is in use on Mac (`en_US.UTF-8`)
+
+* Confirmed that the Homebrew default of `initdb --locale=C -E UTF-8 /usr/local/var/postgres` matches the Docker image default locale.
+* Modified `/usr/local/var/postgres/postgresql.conf` to use the same exact [postgres.conf](postgres.conf) file as in our final split-table Docker test:
+
+```
+listen_addresses = '*'
+					# comma-separated list of addresses;
+					# defaults to 'localhost'; use '*' for all
+					# (change requires restart)
+
+# DB Version: 13
+# OS Type: linux
+# DB Type: dw
+# Total Memory (RAM): 10 GB
+# CPUs num: 8
+# Connections num: 20
+# Data Storage: ssd
+
+max_connections = 128
+shared_buffers = 2560MB
+effective_cache_size = 7680MB
+maintenance_work_mem = 1280MB
+checkpoint_completion_target = 0.9
+wal_buffers = 16MB
+default_statistics_target = 500
+random_page_cost = 1.1
+effective_io_concurrency = 200
+work_mem = 8GB
+min_wal_size = 4GB
+max_wal_size = 16GB
+max_worker_processes = 8
+max_parallel_workers_per_gather = 4
+max_parallel_workers = 8
+max_parallel_maintenance_workers = 4
+```
+
+Launched Postgres using:
+
+```
+pg_ctl -D /usr/local/var/postgres start
+```
+
+We then modified the configuration to set:
+
+```
+effective_io_concurrency = 0
+```
+
+As Postgres clearly stated:
+
+```
+[47671] DETAIL:  effective_io_concurrency must be set to 0 on platforms that lack posix_fadvise().
+[47671] FATAL:  configuration file "/usr/local/var/postgres/postgresql.conf" contains errors
+ stopped waiting
+pg_ctl: could not start server
+Examine the log output.
+```
+
+We then created the postgres user:
+
+```
+/usr/local/opt/postgres/bin/createuser -s postgres
+```
+
+## DB schema creation
+
+Create the DB schema in a `psql -U postgres` prompt:
+
+```sql
+BEGIN;
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+CREATE TABLE IF NOT EXISTS files (
+    id bigserial PRIMARY KEY,
+    contents text NOT NULL,
+    filepath text NOT NULL
+);
+COMMIT;
+```
+
+## Inserting the corpus
+
+And began to insert all of the 20k repos of files into the DB (no index yet):
+
+```
+go install ./cmd/corpusindex; DATABASE=postgres://postgres@127.0.0.1:5432/postgres time ./index-corpus.sh &> index_logs/native_postgres
+```
+
+Just as before, we count the number of files we've inserted into the DB and then drop the second half:
+
+```
+postgres=# select count(*) from files;
+  count   
+----------
+ 19451299
+(1 row)
+```
+
+```
+DELETE FROM files WHERE id > 9720910;
+```
+
+And we confirm the data size is effectively identical to before (off by a few files worth of data, since repo ordering within groups of ~10 are not guaranteed due to inserting in parallel):
+
+```
+postgres=# select count(filepath) from files;
+  count  
+---------
+ 9720910
+(1 row)
+
+postgres=# select SUM(octet_length(contents)) from files;
+     sum     
+-------------
+ 88201180685
+(1 row)
+```
+
+## Splitting the table
+
+We again generate the queries to create the split 200 tables each with 50,000 rows max:
+
+```sql
+$ go run ./cmd/tablesplitgen/main.go create
+CREATE TABLE files_000 AS SELECT * FROM files WHERE id > 0 AND id < 50000;
+CREATE TABLE files_001 AS SELECT * FROM files WHERE id > 50000 AND id < 100000;
+CREATE TABLE files_002 AS SELECT * FROM files WHERE id > 100000 AND id < 150000;
+CREATE TABLE files_003 AS SELECT * FROM files WHERE id > 150000 AND id < 200000;
+CREATE TABLE files_004 AS SELECT * FROM files WHERE id > 200000 AND id < 250000;
+...
+```
+
+And ran those in a `psql` prompt.
+
+Creation of these tables was much faster than in Docker, around 2-8s each instead of 20-40s previously - taking only 15m total instead of 2h total before.
+
+## Creating the Trigram index
+
+And again used the same program to generate and run the SQL statements for indexing, e.g.:
+
+```sql
+CREATE INDEX IF NOT EXISTS files_000_contents_trgm_idx ON files USING GIN (contents gin_trgm_ops);
+```
+
+In parallel (8 at a time), for all 200 tables:
+
+```sh
+PARALLEL=8 NATIVE=true go run ./cmd/tablesplitgen/main.go index &> ./index_logs/native-index-1.log
+```
+
+We recorded native CPU/memory/etc stats from `top` during this using:
+
+```sh
+OUT=native_stats_logs/index-1.log ./capture-native-stats.sh
+```
+
+Indexing was also much faster than in Docker, taking only 23m compared to ~3h with Docker.
+
+## Query benchmarking
+
+We capture native CPU/memory/etc numbers using:
+
+```sh
+OUT=native_stats_logs/query-run-split-index-1.log ./capture-native-stats.sh
+```
+
+And use the same exact tests as before:
+
+```sql
+ALTER DATABASE postgres SET statement_timeout = '3600s';
+```
+
+```
+./query-split-corpus.sh &> query_logs/query-run-split-index-1.log
+```
+
+In total this completed in 14m28.178s, and just as in our earlier quick test it ran 350 queries:
+
+```
+$ cat ./query_logs/query-run-split-index-native-1.log | go run ./cmd/visualize-query-log/main.go | jq -c '.[] | {Timeout: .Timeout, Limit: .Limit, Results: .Rows, Query: .Query}' | wc -l
+     350
+```
+
+Using the following _before_ query:
+
+```
+$ cat ./query_logs/query-run-split-index-1.log | go run ./cmd/visualize-query-log/main.go | jq '.[] | select (.ExecutionTimeMs < 25000)' | jq -c -s '.[]' | wc -l
+```
+
+And the following _after_ query:
+
+```
+$ cat ./query_logs/query-run-split-index-native-1.log | go run ./cmd/visualize-query-log/main.go | jq '.[] | select (.ExecutionTimeMs < 25000)' | jq -c -s '.[]' | wc -l
+```
+
+We can determine the following substantial improvements to query performance (negative change is good):
+
+| Change | Time bucket | Queries under bucket **before** | Queries under bucket **after** |
+|--------|-------------|---------------------------------|--------------------------------|
+| 0%     | 500s        | 350 of 350                      | 350 of 350                     |
+| -12%   | 100s        | 309 of 350                      | 350 of 350                     |
+| -12%   | 50s         | 309 of 350                      | 350 of 350                     |
+| -12%   | 40s         | 308 of 350                      | 350 of 350                     |
+| -12%   | 30s         | 308 of 350                      | 349 of 350                     |
+| -7%    | 25s         | 307 of 350                      | 330 of 350                     |
+| -7%    | 25s         | 307 of 350                      | 330 of 350                     |
+| -8%    | 20s         | 302 of 350                      | 330 of 350                     |
+| -8%    | 20s         | 302 of 350                      | 330 of 350                     |
+| -5%    | 10s         | 297 of 350                      | 311 of 350                     |
+| -26%   | 5s          | 237 of 350                      | 319 of 350                     |
+| -7%    | 2500ms      | 224 of 350                      | 240 of 350                     |
+| -9%    | 2000ms      | 219 of 350                      | 240 of 350                     |
+| -9%    | 1500ms      | 219 of 350                      | 240 of 350                     |
+| -16%   | 1000ms      | 200 of 350                      | 237 of 350                     |
+| -14%   | 750ms       | 190 of 350                      | 221 of 350                     |
+| -23%   | 500ms       | 170 of 350                      | 220 of 350                     |
+| -59%   | 250ms       | 88 of 350                       | 217 of 350                     |
+| -99%   | 100ms       | 1 of 350                        | 168 of 350                     |
+| -99%   | 50ms        | 1 of 350                        | 168 of 350                     |
+
+The substantial things to note here are:
+
+1. Queries that were previously very slow noticed a ~12% improvement. This is likely due to IO operations needed when interfacing with the 200 separate tables.
+2. Queries that were previously in the middle-ground noticed meager ~5% improvements.
+3. Queries that were previously fairly fast (likely searching only over a few tables before returning) noticed substantial 16-99% improvements.
+
+CPU/memory usage was comparable to our earlier test, consuming all CPU cores and roughly the same amount of memory, and we did record extensive samples of it throughout querying in `native_stats_logs/query-run-split-index-1.log` - but we did not write tooling to visualize it.

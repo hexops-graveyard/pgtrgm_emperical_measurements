@@ -132,17 +132,28 @@ func runPostgresQueriesInParallel(queries []string, workers int) {
 				queriesMu.Unlock()
 
 				fmt.Println("query:", query)
-				cmd := exec.Command(
-					"docker",
-					"exec",
-					"-it",
-					"postgres",
-					"psql",
-					"-U", "postgres",
-					"-P", "pager=off",
-					"-c", `\timing`,
-					"-c", query,
-				)
+				var cmd *exec.Cmd
+				if os.Getenv("NATIVE") == "true" {
+					cmd = exec.Command(
+						"psql",
+						"-U", "postgres",
+						"-P", "pager=off",
+						"-c", `\timing`,
+						"-c", query,
+					)
+				} else {
+					cmd = exec.Command(
+						"docker",
+						"exec",
+						"-it",
+						"postgres",
+						"psql",
+						"-U", "postgres",
+						"-P", "pager=off",
+						"-c", `\timing`,
+						"-c", query,
+					)
+				}
 				cmd.Stdin = os.Stdin
 				cmd.Stderr = os.Stderr
 				cmd.Stdout = os.Stdout

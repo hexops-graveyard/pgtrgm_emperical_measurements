@@ -1,0 +1,800 @@
+query: CREATE INDEX IF NOT EXISTS files_001_contents_trgm_idx ON files_001 USING GIN (contents gin_trgm_ops);
+query: CREATE INDEX IF NOT EXISTS files_000_contents_trgm_idx ON files_000 USING GIN (contents gin_trgm_ops);
+query: CREATE INDEX IF NOT EXISTS files_002_contents_trgm_idx ON files_002 USING GIN (contents gin_trgm_ops);
+query: CREATE INDEX IF NOT EXISTS files_003_contents_trgm_idx ON files_003 USING GIN (contents gin_trgm_ops);
+query: CREATE INDEX IF NOT EXISTS files_004_contents_trgm_idx ON files_004 USING GIN (contents gin_trgm_ops);
+query: CREATE INDEX IF NOT EXISTS files_005_contents_trgm_idx ON files_005 USING GIN (contents gin_trgm_ops);
+query: CREATE INDEX IF NOT EXISTS files_006_contents_trgm_idx ON files_006 USING GIN (contents gin_trgm_ops);
+query: CREATE INDEX IF NOT EXISTS files_007_contents_trgm_idx ON files_007 USING GIN (contents gin_trgm_ops);
+Timing is on.
+Timing is on.
+Timing is on.
+Timing is on.
+Timing is on.
+Timing is on.
+Timing is on.
+Timing is on.
+CREATE INDEX
+Time: 41943.639 ms (00:41.944)
+query: CREATE INDEX IF NOT EXISTS files_008_contents_trgm_idx ON files_008 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 44163.891 ms (00:44.164)
+query: CREATE INDEX IF NOT EXISTS files_009_contents_trgm_idx ON files_009 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 47176.039 ms (00:47.176)
+query: CREATE INDEX IF NOT EXISTS files_010_contents_trgm_idx ON files_010 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 49212.705 ms (00:49.213)
+query: CREATE INDEX IF NOT EXISTS files_011_contents_trgm_idx ON files_011 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 49666.954 ms (00:49.667)
+query: CREATE INDEX IF NOT EXISTS files_012_contents_trgm_idx ON files_012 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 54201.601 ms (00:54.202)
+query: CREATE INDEX IF NOT EXISTS files_013_contents_trgm_idx ON files_013 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 56635.210 ms (00:56.635)
+query: CREATE INDEX IF NOT EXISTS files_014_contents_trgm_idx ON files_014 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 61797.770 ms (01:01.798)
+query: CREATE INDEX IF NOT EXISTS files_015_contents_trgm_idx ON files_015 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 41663.543 ms (00:41.664)
+query: CREATE INDEX IF NOT EXISTS files_016_contents_trgm_idx ON files_016 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 49548.042 ms (00:49.548)
+query: CREATE INDEX IF NOT EXISTS files_017_contents_trgm_idx ON files_017 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 56307.291 ms (00:56.307)
+query: CREATE INDEX IF NOT EXISTS files_018_contents_trgm_idx ON files_018 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 49756.458 ms (00:49.756)
+query: CREATE INDEX IF NOT EXISTS files_019_contents_trgm_idx ON files_019 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 50444.590 ms (00:50.445)
+query: CREATE INDEX IF NOT EXISTS files_020_contents_trgm_idx ON files_020 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 46920.748 ms (00:46.921)
+query: CREATE INDEX IF NOT EXISTS files_021_contents_trgm_idx ON files_021 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 49539.746 ms (00:49.540)
+query: CREATE INDEX IF NOT EXISTS files_022_contents_trgm_idx ON files_022 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 60799.937 ms (01:00.800)
+query: CREATE INDEX IF NOT EXISTS files_023_contents_trgm_idx ON files_023 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 47453.724 ms (00:47.454)
+query: CREATE INDEX IF NOT EXISTS files_024_contents_trgm_idx ON files_024 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 41212.210 ms (00:41.212)
+query: CREATE INDEX IF NOT EXISTS files_025_contents_trgm_idx ON files_025 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 44385.857 ms (00:44.386)
+query: CREATE INDEX IF NOT EXISTS files_026_contents_trgm_idx ON files_026 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 49104.109 ms (00:49.104)
+query: CREATE INDEX IF NOT EXISTS files_027_contents_trgm_idx ON files_027 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 58715.991 ms (00:58.716)
+query: CREATE INDEX IF NOT EXISTS files_028_contents_trgm_idx ON files_028 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 58554.856 ms (00:58.555)
+query: CREATE INDEX IF NOT EXISTS files_029_contents_trgm_idx ON files_029 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 60509.173 ms (01:00.509)
+query: CREATE INDEX IF NOT EXISTS files_030_contents_trgm_idx ON files_030 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 35182.535 ms (00:35.183)
+query: CREATE INDEX IF NOT EXISTS files_031_contents_trgm_idx ON files_031 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 53858.431 ms (00:53.858)
+query: CREATE INDEX IF NOT EXISTS files_032_contents_trgm_idx ON files_032 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 27546.780 ms (00:27.547)
+query: CREATE INDEX IF NOT EXISTS files_033_contents_trgm_idx ON files_033 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 49826.130 ms (00:49.826)
+query: CREATE INDEX IF NOT EXISTS files_034_contents_trgm_idx ON files_034 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 45986.079 ms (00:45.986)
+query: CREATE INDEX IF NOT EXISTS files_035_contents_trgm_idx ON files_035 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 42001.407 ms (00:42.001)
+query: CREATE INDEX IF NOT EXISTS files_036_contents_trgm_idx ON files_036 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 60528.411 ms (01:00.528)
+query: CREATE INDEX IF NOT EXISTS files_037_contents_trgm_idx ON files_037 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 60850.377 ms (01:00.850)
+query: CREATE INDEX IF NOT EXISTS files_038_contents_trgm_idx ON files_038 USING GIN (contents gin_trgm_ops);
+CREATE INDEX
+Time: 24475.206 ms (00:24.475)
+query: CREATE INDEX IF NOT EXISTS files_039_contents_trgm_idx ON files_039 USING GIN (contents gin_trgm_ops);
+Timing is on.
+Timing is on.
+CREATE INDEX
+Time: 24125.508 ms (00:24.126)
+query: CREATE INDEX IF NOT EXISTS files_040_contents_trgm_idx ON files_040 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 61345.440 ms (01:01.345)
+query: CREATE INDEX IF NOT EXISTS files_041_contents_trgm_idx ON files_041 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 47959.466 ms (00:47.959)
+query: CREATE INDEX IF NOT EXISTS files_042_contents_trgm_idx ON files_042 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 85678.083 ms (01:25.678)
+query: CREATE INDEX IF NOT EXISTS files_043_contents_trgm_idx ON files_043 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 73698.945 ms (01:13.699)
+query: CREATE INDEX IF NOT EXISTS files_044_contents_trgm_idx ON files_044 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 80293.217 ms (01:20.293)
+query: CREATE INDEX IF NOT EXISTS files_045_contents_trgm_idx ON files_045 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 60154.732 ms (01:00.155)
+query: CREATE INDEX IF NOT EXISTS files_046_contents_trgm_idx ON files_046 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 64444.190 ms (01:04.444)
+query: CREATE INDEX IF NOT EXISTS files_047_contents_trgm_idx ON files_047 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 44962.895 ms (00:44.963)
+query: CREATE INDEX IF NOT EXISTS files_048_contents_trgm_idx ON files_048 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 63509.624 ms (01:03.510)
+query: CREATE INDEX IF NOT EXISTS files_049_contents_trgm_idx ON files_049 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 52858.032 ms (00:52.858)
+query: CREATE INDEX IF NOT EXISTS files_050_contents_trgm_idx ON files_050 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 82075.686 ms (01:22.076)
+query: CREATE INDEX IF NOT EXISTS files_051_contents_trgm_idx ON files_051 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 46136.085 ms (00:46.136)
+query: CREATE INDEX IF NOT EXISTS files_052_contents_trgm_idx ON files_052 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 32786.861 ms (00:32.787)
+query: CREATE INDEX IF NOT EXISTS files_053_contents_trgm_idx ON files_053 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 40122.353 ms (00:40.122)
+query: CREATE INDEX IF NOT EXISTS files_054_contents_trgm_idx ON files_054 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 26602.008 ms (00:26.602)
+query: CREATE INDEX IF NOT EXISTS files_055_contents_trgm_idx ON files_055 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 49359.085 ms (00:49.359)
+query: CREATE INDEX IF NOT EXISTS files_056_contents_trgm_idx ON files_056 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 59613.581 ms (00:59.614)
+query: CREATE INDEX IF NOT EXISTS files_057_contents_trgm_idx ON files_057 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 93339.095 ms (01:33.339)
+query: CREATE INDEX IF NOT EXISTS files_058_contents_trgm_idx ON files_058 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 52489.462 ms (00:52.489)
+query: CREATE INDEX IF NOT EXISTS files_059_contents_trgm_idx ON files_059 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 36934.853 ms (00:36.935)
+query: CREATE INDEX IF NOT EXISTS files_060_contents_trgm_idx ON files_060 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 57181.914 ms (00:57.182)
+query: CREATE INDEX IF NOT EXISTS files_061_contents_trgm_idx ON files_061 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 36986.230 ms (00:36.986)
+query: CREATE INDEX IF NOT EXISTS files_062_contents_trgm_idx ON files_062 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 42212.203 ms (00:42.212)
+query: CREATE INDEX IF NOT EXISTS files_063_contents_trgm_idx ON files_063 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 77514.560 ms (01:17.515)
+query: CREATE INDEX IF NOT EXISTS files_064_contents_trgm_idx ON files_064 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 41941.082 ms (00:41.941)
+query: CREATE INDEX IF NOT EXISTS files_065_contents_trgm_idx ON files_065 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 23523.834 ms (00:23.524)
+query: CREATE INDEX IF NOT EXISTS files_066_contents_trgm_idx ON files_066 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 24177.363 ms (00:24.177)
+query: CREATE INDEX IF NOT EXISTS files_067_contents_trgm_idx ON files_067 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 108549.161 ms (01:48.549)
+query: CREATE INDEX IF NOT EXISTS files_068_contents_trgm_idx ON files_068 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 48612.849 ms (00:48.613)
+query: CREATE INDEX IF NOT EXISTS files_069_contents_trgm_idx ON files_069 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 27895.513 ms (00:27.896)
+query: CREATE INDEX IF NOT EXISTS files_070_contents_trgm_idx ON files_070 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 73439.463 ms (01:13.439)
+query: CREATE INDEX IF NOT EXISTS files_071_contents_trgm_idx ON files_071 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 60801.539 ms (01:00.802)
+query: CREATE INDEX IF NOT EXISTS files_072_contents_trgm_idx ON files_072 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 33638.917 ms (00:33.639)
+query: CREATE INDEX IF NOT EXISTS files_073_contents_trgm_idx ON files_073 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 29927.834 ms (00:29.928)
+query: CREATE INDEX IF NOT EXISTS files_074_contents_trgm_idx ON files_074 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 41654.021 ms (00:41.654)
+query: CREATE INDEX IF NOT EXISTS files_075_contents_trgm_idx ON files_075 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 16824.993 ms (00:16.825)
+query: CREATE INDEX IF NOT EXISTS files_076_contents_trgm_idx ON files_076 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 41621.702 ms (00:41.622)
+query: CREATE INDEX IF NOT EXISTS files_077_contents_trgm_idx ON files_077 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 52572.788 ms (00:52.573)
+query: CREATE INDEX IF NOT EXISTS files_078_contents_trgm_idx ON files_078 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 64503.788 ms (01:04.504)
+query: CREATE INDEX IF NOT EXISTS files_079_contents_trgm_idx ON files_079 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 75364.942 ms (01:15.365)
+query: CREATE INDEX IF NOT EXISTS files_080_contents_trgm_idx ON files_080 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 11771.001 ms (00:11.771)
+query: CREATE INDEX IF NOT EXISTS files_081_contents_trgm_idx ON files_081 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 30678.988 ms (00:30.679)
+query: CREATE INDEX IF NOT EXISTS files_082_contents_trgm_idx ON files_082 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 41442.717 ms (00:41.443)
+query: CREATE INDEX IF NOT EXISTS files_083_contents_trgm_idx ON files_083 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 42030.351 ms (00:42.030)
+query: CREATE INDEX IF NOT EXISTS files_084_contents_trgm_idx ON files_084 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 25856.560 ms (00:25.857)
+query: CREATE INDEX IF NOT EXISTS files_085_contents_trgm_idx ON files_085 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 33195.441 ms (00:33.195)
+query: CREATE INDEX IF NOT EXISTS files_086_contents_trgm_idx ON files_086 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 50612.399 ms (00:50.612)
+query: CREATE INDEX IF NOT EXISTS files_087_contents_trgm_idx ON files_087 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 28898.546 ms (00:28.899)
+query: CREATE INDEX IF NOT EXISTS files_088_contents_trgm_idx ON files_088 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 51522.682 ms (00:51.523)
+query: CREATE INDEX IF NOT EXISTS files_089_contents_trgm_idx ON files_089 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 39606.798 ms (00:39.607)
+query: CREATE INDEX IF NOT EXISTS files_090_contents_trgm_idx ON files_090 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 41824.320 ms (00:41.824)
+query: CREATE INDEX IF NOT EXISTS files_091_contents_trgm_idx ON files_091 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 26909.329 ms (00:26.909)
+query: CREATE INDEX IF NOT EXISTS files_092_contents_trgm_idx ON files_092 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 43555.650 ms (00:43.556)
+query: CREATE INDEX IF NOT EXISTS files_093_contents_trgm_idx ON files_093 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 38931.962 ms (00:38.932)
+query: CREATE INDEX IF NOT EXISTS files_094_contents_trgm_idx ON files_094 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 45514.444 ms (00:45.514)
+query: CREATE INDEX IF NOT EXISTS files_095_contents_trgm_idx ON files_095 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 51016.018 ms (00:51.016)
+query: CREATE INDEX IF NOT EXISTS files_096_contents_trgm_idx ON files_096 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 39461.424 ms (00:39.461)
+query: CREATE INDEX IF NOT EXISTS files_097_contents_trgm_idx ON files_097 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 29028.739 ms (00:29.029)
+query: CREATE INDEX IF NOT EXISTS files_098_contents_trgm_idx ON files_098 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 32305.046 ms (00:32.305)
+query: CREATE INDEX IF NOT EXISTS files_099_contents_trgm_idx ON files_099 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 35416.432 ms (00:35.416)
+query: CREATE INDEX IF NOT EXISTS files_100_contents_trgm_idx ON files_100 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 41263.031 ms (00:41.263)
+query: CREATE INDEX IF NOT EXISTS files_101_contents_trgm_idx ON files_101 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 48123.034 ms (00:48.123)
+query: CREATE INDEX IF NOT EXISTS files_102_contents_trgm_idx ON files_102 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 40232.989 ms (00:40.233)
+query: CREATE INDEX IF NOT EXISTS files_103_contents_trgm_idx ON files_103 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 43586.052 ms (00:43.586)
+query: CREATE INDEX IF NOT EXISTS files_104_contents_trgm_idx ON files_104 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 44308.560 ms (00:44.309)
+query: CREATE INDEX IF NOT EXISTS files_105_contents_trgm_idx ON files_105 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 34714.612 ms (00:34.715)
+query: CREATE INDEX IF NOT EXISTS files_106_contents_trgm_idx ON files_106 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 53299.299 ms (00:53.299)
+query: CREATE INDEX IF NOT EXISTS files_107_contents_trgm_idx ON files_107 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 29070.144 ms (00:29.070)
+query: CREATE INDEX IF NOT EXISTS files_108_contents_trgm_idx ON files_108 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 44221.561 ms (00:44.222)
+query: CREATE INDEX IF NOT EXISTS files_109_contents_trgm_idx ON files_109 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 50494.158 ms (00:50.494)
+query: CREATE INDEX IF NOT EXISTS files_110_contents_trgm_idx ON files_110 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 50164.295 ms (00:50.164)
+query: CREATE INDEX IF NOT EXISTS files_111_contents_trgm_idx ON files_111 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 46752.694 ms (00:46.753)
+query: CREATE INDEX IF NOT EXISTS files_112_contents_trgm_idx ON files_112 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 30331.433 ms (00:30.331)
+query: CREATE INDEX IF NOT EXISTS files_113_contents_trgm_idx ON files_113 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 46856.608 ms (00:46.857)
+query: CREATE INDEX IF NOT EXISTS files_114_contents_trgm_idx ON files_114 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 37811.132 ms (00:37.811)
+query: CREATE INDEX IF NOT EXISTS files_115_contents_trgm_idx ON files_115 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 40523.970 ms (00:40.524)
+query: CREATE INDEX IF NOT EXISTS files_116_contents_trgm_idx ON files_116 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 47403.161 ms (00:47.403)
+query: CREATE INDEX IF NOT EXISTS files_117_contents_trgm_idx ON files_117 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 10515.086 ms (00:10.515)
+query: CREATE INDEX IF NOT EXISTS files_118_contents_trgm_idx ON files_118 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 73403.870 ms (01:13.404)
+query: CREATE INDEX IF NOT EXISTS files_119_contents_trgm_idx ON files_119 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 92995.292 ms (01:32.995)
+query: CREATE INDEX IF NOT EXISTS files_120_contents_trgm_idx ON files_120 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 24625.225 ms (00:24.625)
+query: CREATE INDEX IF NOT EXISTS files_121_contents_trgm_idx ON files_121 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 63135.686 ms (01:03.136)
+query: CREATE INDEX IF NOT EXISTS files_122_contents_trgm_idx ON files_122 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 102716.137 ms (01:42.716)
+query: CREATE INDEX IF NOT EXISTS files_123_contents_trgm_idx ON files_123 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 120193.522 ms (02:00.194)
+query: CREATE INDEX IF NOT EXISTS files_124_contents_trgm_idx ON files_124 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 33071.705 ms (00:33.072)
+query: CREATE INDEX IF NOT EXISTS files_125_contents_trgm_idx ON files_125 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 41340.991 ms (00:41.341)
+query: CREATE INDEX IF NOT EXISTS files_126_contents_trgm_idx ON files_126 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 128384.004 ms (02:08.384)
+query: CREATE INDEX IF NOT EXISTS files_127_contents_trgm_idx ON files_127 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 104135.968 ms (01:44.136)
+query: CREATE INDEX IF NOT EXISTS files_128_contents_trgm_idx ON files_128 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 139359.009 ms (02:19.359)
+query: CREATE INDEX IF NOT EXISTS files_129_contents_trgm_idx ON files_129 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 41139.108 ms (00:41.139)
+query: CREATE INDEX IF NOT EXISTS files_130_contents_trgm_idx ON files_130 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 66803.131 ms (01:06.803)
+query: CREATE INDEX IF NOT EXISTS files_131_contents_trgm_idx ON files_131 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 111148.048 ms (01:51.148)
+query: CREATE INDEX IF NOT EXISTS files_132_contents_trgm_idx ON files_132 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 99077.253 ms (01:39.077)
+query: CREATE INDEX IF NOT EXISTS files_133_contents_trgm_idx ON files_133 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 43064.016 ms (00:43.064)
+query: CREATE INDEX IF NOT EXISTS files_134_contents_trgm_idx ON files_134 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 99606.793 ms (01:39.607)
+query: CREATE INDEX IF NOT EXISTS files_135_contents_trgm_idx ON files_135 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 51172.072 ms (00:51.172)
+query: CREATE INDEX IF NOT EXISTS files_136_contents_trgm_idx ON files_136 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 26529.850 ms (00:26.530)
+query: CREATE INDEX IF NOT EXISTS files_137_contents_trgm_idx ON files_137 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 70564.170 ms (01:10.564)
+query: CREATE INDEX IF NOT EXISTS files_138_contents_trgm_idx ON files_138 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 101889.004 ms (01:41.889)
+query: CREATE INDEX IF NOT EXISTS files_139_contents_trgm_idx ON files_139 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 30865.712 ms (00:30.866)
+query: CREATE INDEX IF NOT EXISTS files_140_contents_trgm_idx ON files_140 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 43415.172 ms (00:43.415)
+query: CREATE INDEX IF NOT EXISTS files_141_contents_trgm_idx ON files_141 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 42606.192 ms (00:42.606)
+query: CREATE INDEX IF NOT EXISTS files_142_contents_trgm_idx ON files_142 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 39798.391 ms (00:39.798)
+query: CREATE INDEX IF NOT EXISTS files_143_contents_trgm_idx ON files_143 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 29980.534 ms (00:29.981)
+query: CREATE INDEX IF NOT EXISTS files_144_contents_trgm_idx ON files_144 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 51398.997 ms (00:51.399)
+query: CREATE INDEX IF NOT EXISTS files_145_contents_trgm_idx ON files_145 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 32491.156 ms (00:32.491)
+query: CREATE INDEX IF NOT EXISTS files_146_contents_trgm_idx ON files_146 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 59169.849 ms (00:59.170)
+query: CREATE INDEX IF NOT EXISTS files_147_contents_trgm_idx ON files_147 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 42099.259 ms (00:42.099)
+query: CREATE INDEX IF NOT EXISTS files_148_contents_trgm_idx ON files_148 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 184729.810 ms (03:04.730)
+query: CREATE INDEX IF NOT EXISTS files_149_contents_trgm_idx ON files_149 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 40807.683 ms (00:40.808)
+query: CREATE INDEX IF NOT EXISTS files_150_contents_trgm_idx ON files_150 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 67419.342 ms (01:07.419)
+query: CREATE INDEX IF NOT EXISTS files_151_contents_trgm_idx ON files_151 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 52453.226 ms (00:52.453)
+query: CREATE INDEX IF NOT EXISTS files_152_contents_trgm_idx ON files_152 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 46569.338 ms (00:46.569)
+query: CREATE INDEX IF NOT EXISTS files_153_contents_trgm_idx ON files_153 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 59468.265 ms (00:59.468)
+query: CREATE INDEX IF NOT EXISTS files_154_contents_trgm_idx ON files_154 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 52254.316 ms (00:52.254)
+query: CREATE INDEX IF NOT EXISTS files_155_contents_trgm_idx ON files_155 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 40300.729 ms (00:40.301)
+query: CREATE INDEX IF NOT EXISTS files_156_contents_trgm_idx ON files_156 USING GIN (contents gin_trgm_ops);
+CREATE INDEX
+Time: 3014.665 ms (00:03.015)
+query: CREATE INDEX IF NOT EXISTS files_157_contents_trgm_idx ON files_157 USING GIN (contents gin_trgm_ops);
+Timing is on.
+Timing is on.
+CREATE INDEX
+Time: 66347.294 ms (01:06.347)
+query: CREATE INDEX IF NOT EXISTS files_158_contents_trgm_idx ON files_158 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 2798.551 ms (00:02.799)
+query: CREATE INDEX IF NOT EXISTS files_159_contents_trgm_idx ON files_159 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 2768.057 ms (00:02.768)
+query: CREATE INDEX IF NOT EXISTS files_160_contents_trgm_idx ON files_160 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 3428.964 ms (00:03.429)
+query: CREATE INDEX IF NOT EXISTS files_161_contents_trgm_idx ON files_161 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 2167.356 ms (00:02.167)
+query: CREATE INDEX IF NOT EXISTS files_162_contents_trgm_idx ON files_162 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 2959.311 ms (00:02.959)
+query: CREATE INDEX IF NOT EXISTS files_163_contents_trgm_idx ON files_163 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 52765.686 ms (00:52.766)
+query: CREATE INDEX IF NOT EXISTS files_164_contents_trgm_idx ON files_164 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 47502.854 ms (00:47.503)
+query: CREATE INDEX IF NOT EXISTS files_165_contents_trgm_idx ON files_165 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 54895.582 ms (00:54.896)
+query: CREATE INDEX IF NOT EXISTS files_166_contents_trgm_idx ON files_166 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 21412.609 ms (00:21.413)
+query: CREATE INDEX IF NOT EXISTS files_167_contents_trgm_idx ON files_167 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 33512.952 ms (00:33.513)
+query: CREATE INDEX IF NOT EXISTS files_168_contents_trgm_idx ON files_168 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 33368.718 ms (00:33.369)
+query: CREATE INDEX IF NOT EXISTS files_169_contents_trgm_idx ON files_169 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 76509.070 ms (01:16.509)
+query: CREATE INDEX IF NOT EXISTS files_170_contents_trgm_idx ON files_170 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 42909.273 ms (00:42.909)
+query: CREATE INDEX IF NOT EXISTS files_171_contents_trgm_idx ON files_171 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 31509.432 ms (00:31.509)
+query: CREATE INDEX IF NOT EXISTS files_172_contents_trgm_idx ON files_172 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 19619.018 ms (00:19.619)
+query: CREATE INDEX IF NOT EXISTS files_173_contents_trgm_idx ON files_173 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 6705.762 ms (00:06.706)
+query: CREATE INDEX IF NOT EXISTS files_174_contents_trgm_idx ON files_174 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 70327.283 ms (01:10.327)
+query: CREATE INDEX IF NOT EXISTS files_175_contents_trgm_idx ON files_175 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 26860.302 ms (00:26.860)
+query: CREATE INDEX IF NOT EXISTS files_176_contents_trgm_idx ON files_176 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 82128.605 ms (01:22.129)
+query: CREATE INDEX IF NOT EXISTS files_177_contents_trgm_idx ON files_177 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 40203.270 ms (00:40.203)
+query: CREATE INDEX IF NOT EXISTS files_178_contents_trgm_idx ON files_178 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 30820.302 ms (00:30.820)
+query: CREATE INDEX IF NOT EXISTS files_179_contents_trgm_idx ON files_179 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 53254.727 ms (00:53.255)
+query: CREATE INDEX IF NOT EXISTS files_180_contents_trgm_idx ON files_180 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 52863.880 ms (00:52.864)
+query: CREATE INDEX IF NOT EXISTS files_181_contents_trgm_idx ON files_181 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 16396.186 ms (00:16.396)
+query: CREATE INDEX IF NOT EXISTS files_182_contents_trgm_idx ON files_182 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 98284.467 ms (01:38.284)
+query: CREATE INDEX IF NOT EXISTS files_183_contents_trgm_idx ON files_183 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 26986.209 ms (00:26.986)
+query: CREATE INDEX IF NOT EXISTS files_184_contents_trgm_idx ON files_184 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 50749.755 ms (00:50.750)
+query: CREATE INDEX IF NOT EXISTS files_185_contents_trgm_idx ON files_185 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 66821.786 ms (01:06.822)
+query: CREATE INDEX IF NOT EXISTS files_186_contents_trgm_idx ON files_186 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 44390.711 ms (00:44.391)
+query: CREATE INDEX IF NOT EXISTS files_187_contents_trgm_idx ON files_187 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 53285.380 ms (00:53.285)
+query: CREATE INDEX IF NOT EXISTS files_188_contents_trgm_idx ON files_188 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 48446.735 ms (00:48.447)
+query: CREATE INDEX IF NOT EXISTS files_189_contents_trgm_idx ON files_189 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 63942.230 ms (01:03.942)
+query: CREATE INDEX IF NOT EXISTS files_190_contents_trgm_idx ON files_190 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 55465.604 ms (00:55.466)
+query: CREATE INDEX IF NOT EXISTS files_191_contents_trgm_idx ON files_191 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 29292.338 ms (00:29.292)
+query: CREATE INDEX IF NOT EXISTS files_192_contents_trgm_idx ON files_192 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 68588.000 ms (01:08.588)
+query: CREATE INDEX IF NOT EXISTS files_193_contents_trgm_idx ON files_193 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 12962.488 ms (00:12.962)
+query: CREATE INDEX IF NOT EXISTS files_194_contents_trgm_idx ON files_194 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 33492.776 ms (00:33.493)
+query: CREATE INDEX IF NOT EXISTS files_195_contents_trgm_idx ON files_195 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 19.017 ms
+query: CREATE INDEX IF NOT EXISTS files_196_contents_trgm_idx ON files_196 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 3.889 ms
+query: CREATE INDEX IF NOT EXISTS files_197_contents_trgm_idx ON files_197 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 3.386 ms
+query: CREATE INDEX IF NOT EXISTS files_198_contents_trgm_idx ON files_198 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 4.631 ms
+query: CREATE INDEX IF NOT EXISTS files_199_contents_trgm_idx ON files_199 USING GIN (contents gin_trgm_ops);
+Timing is on.
+CREATE INDEX
+Time: 4.958 ms
+CREATE INDEX
+Time: 3358.323 ms (00:03.358)
+CREATE INDEX
+Time: 54638.698 ms (00:54.639)
+CREATE INDEX
+Time: 41186.216 ms (00:41.186)
+CREATE INDEX
+Time: 40164.505 ms (00:40.165)
+CREATE INDEX
+Time: 21510.687 ms (00:21.511)
+CREATE INDEX
+Time: 43167.606 ms (00:43.168)
+CREATE INDEX
+Time: 54035.058 ms (00:54.035)
